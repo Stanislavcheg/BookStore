@@ -1,0 +1,54 @@
+%main.container.general-main-wrap
+  = render 'checkout/steps_panel'
+  = simple_form_for @delivery_form, url: wizard_path, method: :put do |f|
+    %h3.general-subtitle Delivery
+    .visible-xs
+      - Delivery.all.order("price desc").each do |delivery|
+        .general-cart-item.divider-lg-bottom.mb-30
+          %table.table
+            %tr
+              %td.col-half
+                %span.in-grey-600 Method
+              %td.col-half
+                .form-group.radio.mt-0.mb-0
+                  %label.radio-label
+                    = f.radio_button(:id, delivery.id, class: "radio-input", hidden: "true")
+                    %span.radio-icon
+                    %span.radio-text= delivery.method
+            %tr
+              %td
+                %span.in-grey-600 Days
+              %td
+                %span.font-16.fw-300= delivery.days
+            %tr
+              %td
+                %span.in-grey-600 Price
+              %td
+                %span.font-16.in-gold-500= number_to_currency(delivery.price,:unit=>'€')
+    .hidden-xs.mb-res-50
+      %table.table.table-hover
+        %thead
+          %tr
+            %th.col-method
+              %span.in-grey-600.ml-40 Method
+            %th
+              %span.in-grey-600 Days
+            %th
+              %span.in-grey-600 Price
+        %tbody
+          - Delivery.all.order("price desc").each do |delivery|
+            %tr
+              %td
+                .form-group.radio.mt-0.mb-0
+                  %label.radio-label
+                    = f.radio_button(:id, delivery.id, class: "radio-input", hidden: "true")
+                    %span.radio-icon
+                    %span.radio-text= delivery.method
+              %td
+                %span= delivery.days
+              %td
+                %span.font-16.in-gold-500= number_to_currency(delivery.price,:unit=>'€')
+    .general-text-align
+      = render 'checkout/order_summary', order: current_order
+    .text-center
+      = f.button :submit, "Save and Continue", class: "btn btn-default mb-20"

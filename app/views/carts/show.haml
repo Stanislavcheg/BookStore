@@ -1,0 +1,59 @@
+- if !@position.nil? && @position.errors.any?
+  .alert.alert-danger
+    %ul
+      - @position.errors.full_messages.each do |msg| 
+        %li= msg 
+%main.container.general-main-wrap
+  %h1.general-title-margin Cart
+  - if @positions.size == 0
+    %p.text-center
+      There are no items in your shopping cart.  Please #{link_to("go back", root_path)} and add some items to your cart.
+  - else
+    .visible-xs
+      - @positions.each do |position| 
+        = render 'carts/cart_row_mobile', book: position.book, position: position
+    .hidden-xs
+      %table.table.table-hover
+        %tr.no-hover
+          %th.col-pic.pl-0
+            %span.in-grey-600 Product
+          %th.col-title
+          %th.col-price
+            %span.in-grey-600 Price
+          %th.col-quantity
+            %span.in-grey-600 Quantity
+          %th.col-total
+            %span.in-grey-600 SubTotal
+          %th.col-close
+        - @positions.each do |position| 
+          = render 'carts/cart_row_desktop', book: position.book, position: position
+    .general-order-wrap
+      .row
+        .col-sm-4
+          .input-group.general-input-group
+            = form_tag('/coupons/link_order', method: "put") do
+              = label_tag :code, "Enter Your Coupon Code", class: "input-label"
+              = text_field_tag :code, "Enter Your Coupon Code", class: "form-control mb-30" 
+              %div
+                = submit_tag "Update cart", class: "btn btn-primary mb-15 res-block"
+        .col-sm-8
+          .res-mr-200.text-center.general-text-right
+            %p.in-gold-500.font-18 Order Summary
+            %table.general-summary-table.general-summary-table-right.general-text-right
+              %tr
+                %td
+                  %p.font-16 Subtotal:
+                %td
+                  %p.font-16= number_to_currency(current_order.subtotal,:unit=>'€')
+              %tr
+                %td
+                  %p.font-16 Coupon:
+                %td
+                  %p.font-16= number_to_currency(current_order.discount,:unit=>'€')
+              %tr
+                %td
+                  %strong.font-18 Order Total:
+                %td
+                  %strong.font-18= number_to_currency(current_order.total,:unit=>'€')
+    = form_tag(checkout_url, method: "get") do
+      = submit_tag 'Checkout', class: "btn btn-default mb-20 center-block"

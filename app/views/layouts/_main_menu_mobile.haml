@@ -1,0 +1,17 @@
+%button.close{type: "button", 'aria-label': "Close"}
+  %span{'aria-hidden': "true"} &times;
+%ul.nav.navbar-nav
+  %li
+    = link_to("Home", root_path)
+  %li
+    %a{type: "button", 'data-toggle': "collapse", href: "#menu", 'aria-expanded': "false", 'aria-controls': "menu"} Shop
+    %ul#menu.collapse.list-unstyled.pl-30.mb-10{'aria-expanded': "false"}
+      = render 'layouts/categories_menu', categories: categories
+  - if user_signed_in?
+    %li
+      %a{type: "button", 'data-toggle': "collapse", href: "#menu2", 'aria-expanded': "false", 'aria-controls': "menu"} My account
+      %ul#menu2.collapse.list-unstyled.pl-30.mb-10{'aria-expanded': "false"}
+        = render 'layouts/account_menu'
+  - else 
+    %li
+      = link_to("Log in/Sign up", new_user_session_path)

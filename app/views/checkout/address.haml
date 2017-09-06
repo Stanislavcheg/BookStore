@@ -1,0 +1,28 @@
+%main.container
+  = render 'checkout/steps_panel'
+  = simple_form_for @addresses_form, url: wizard_path, method: :put do |f|
+    %form.res-mb-100
+      .hidden-xs.hidden-sm
+        .row
+          .col-md-5
+            %h3.general-subtitle Billing Address
+          .col-md-5.col-md-offset-1
+            %h3.general-subtitle Shipping Address
+      .row
+        .col-md-5.mb-40
+          .visible-xs.visible-sm
+            %h3.general-subtitle Billing Address
+          = render 'checkout/address', param_name: :billing_address, address: @addresses_form.billing_address, parent_form: f
+        .col-md-5.col-md-offset-1.mb-60
+          .visible-xs.visible-sm
+            %h3.general-subtitle Shipping Address
+          = render 'checkout/address', param_name: :shipping_address, address: @addresses_form.shipping_address, parent_form: f
+          .form-group.checkbox
+            %label.checkbox-label
+              %input.checkbox-input#copy_billing{type: "checkbox", hidden: "true"}
+              %span.checkbox-icon
+                %i.fa.fa-check
+              %span.checkbox-text Use Billing Address
+      .general-text-align.mb-60
+        = render 'checkout/order_summary', order: current_order
+        = f.button :submit, "Save and Continue", class: "btn center-block mb-20"

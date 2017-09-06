@@ -1,0 +1,25 @@
+= form_for(address) do |f|
+  .form-group.has-error
+    = f.label :first_name, class: "control-label input-label", value: "First Name"
+    = f.text_field :first_name, autofocus: true, class: "form-control", id: "firstName", placeholder: "First Name"
+    %span.help-block Please enter your first name
+  .form-group
+    = f.label :last_name, class: "control-label input-label", value: "Last Name"
+    = f.text_field :last_name, class: "form-control", id: "lastName", placeholder: "Last Name"
+  .form-group
+    = f.label :address, class: "control-label input-label", value: "Address"
+    = f.text_field :address, class: "form-control", id: "address", placeholder: "Address"
+  .form-group
+    = f.label :city, class: "control-label input-label", value: "City"
+    = f.text_field :city, class: "form-control", id: "city", placeholder: "City"
+  .form-group
+    = f.label :zip, class: "control-label input-label", value: "Zip"
+    = f.text_field :zip, class: "form-control", id: "zip", placeholder: "Zip"
+  .form-group
+    = f.label :country, class: "control-label input-label", value: "Country"
+    = f.text_field :country, class: "form-control", id: "country", placeholder: "Country"
+  .form-group.mb-60
+    = f.label :phone, class: "control-label input-label", value: "Phone"
+    = f.text_field :phone, class: "form-control", id: "phone", placeholder: "Example +355 66 123 4567"
+  .text-center.general-text-align
+    = f.submit "Save", class: "btn btn-default"

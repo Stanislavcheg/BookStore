@@ -1,0 +1,22 @@
+%main.container.mb-res-50
+  = render 'checkout/steps_panel'
+  = simple_form_for @payment_form, url: wizard_path, method: :put do |f|
+    %h3.general-subtitle Credit Card
+    %div.max-600.mb-80
+      .form-group
+        = f.input :number, label: 'Card Number', class: "form-control", id: "cardNumber", placeholder: "Card Number", label_html: { class: 'control-label input-label' }
+      .row
+        .col-sm-6
+          .form-group
+            = f.input :name, label: 'Name on Card', class: "form-control", id: "cardName", placeholder: "Name on Card", label_html: { class: 'control-label input-label' }
+        .col-sm-3
+          .form-group
+            = f.input :expires, label: 'MM / YY', class: "form-control", id: "expires", placeholder: "MM / YY", label_html: { class: 'control-label input-label' }
+        .col-sm-3
+          .form-group.relative
+            = f.input :cvv, label: 'CVV', class: "form-control", id: "cvv", placeholder: "CVV", label_html: { class: 'control-label input-label' }
+            %i.fa.fa-question-circle.general-form-help
+    .general-text-align
+      = render 'checkout/order_summary', order: current_order
+    .text-center
+      = f.button :submit, "Save and Continue", class: "btn btn-default mb-80"

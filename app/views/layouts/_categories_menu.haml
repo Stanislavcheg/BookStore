@@ -1,0 +1,5 @@
+%li
+  = link_to("All", books_path, class: "collapse-link")
+- categories.each do |category|
+  %li
+    = link_to(category.name, category_books_path(category), class: "collapse-link")

@@ -1,0 +1,19 @@
+%main.container
+  %h1.general-title-margin Сatalog
+  .hidden-xs.clearfix
+    .dropdowns.pull-right
+      .dropdown.width-240
+        = render 'books/catalog/sort_dropdown', page_number: @page_number, category: @category, sort_title: @sort_title
+    %ul.list-inline.pt-10.mb-25.mr-240
+      = render 'books/catalog/categories_menu', categories: categories
+  .dropdowns.mb-25.visible-xs
+    %p.lead.small.mb-10 Filter by category
+    .dropdown
+      = render 'books/catalog/categories_dropdown', title: (@category.try(:name) || 'All'), categories: categories
+    %p.lead.small.mb-10 Sort by
+    .dropdown
+      = render 'books/catalog/sort_dropdown', page_number: @page_number, category: @category, sort_title: @sort_title
+  .mb-120
+    = render 'books/catalog/books', books: @books
+    .text-center
+      = render 'books/catalog/view_more', more_books_left: @more_books_left, page_number: @page, sort_by: @sort_by, category_id: @category.try(:id), sort_title: @sort_title

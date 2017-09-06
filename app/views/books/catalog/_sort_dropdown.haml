@@ -1,0 +1,12 @@
+%a.dropdown-toggle.lead.small.sort{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"}
+	= sort_title
+	%i.fa.fa-angle-down.dropdown-icon.pull-right
+%ul.dropdown-menu
+	%li
+		= sortable("Newest first", "created_at DESC", page_number, category)
+	%li
+		%a{href: "#"} Popular first
+	%li
+		= sortable("Price: Low to high", "price ASC", page_number, category)
+	%li
+		= sortable("Price: High to low", "price DESC", page_number, category)

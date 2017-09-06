@@ -1,0 +1,15 @@
+%ul.nav.navbar-nav
+  %li
+    = link_to("Home", root_path)
+  %li.dropdown
+    %a.dropdown-toggle{href: books_path, 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"} Shop
+    %ul.dropdown-menu
+      = render 'layouts/categories_menu', categories: categories
+  - if user_signed_in?
+    %li.dropdown
+      %a.dropdown-toggle{href: books_path, 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"} My account
+      %ul.dropdown-menu
+        = render 'layouts/account_menu'
+  - else 
+    %li
+      = link_to("Log in/Sign up", new_user_session_path)

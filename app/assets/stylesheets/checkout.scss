@@ -1,0 +1,16 @@
+// Place all the styles related to the checkout controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+#confirm_order_summary {
+	float: right;
+}
+
+#confirm_order_summary table {
+	text-align: right;
+	margin: 30px
+}
+
+#confirm_submit {
+	clear: both;
+}

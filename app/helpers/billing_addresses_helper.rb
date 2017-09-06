@@ -1,0 +1,3 @@
+module BillingAddressesHelper
+
+end

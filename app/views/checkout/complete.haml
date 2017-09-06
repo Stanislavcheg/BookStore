@@ -1,0 +1,21 @@
+%main.container.general-main-wrap
+  = render 'checkout/steps_panel'
+  .text-center.mb-40
+    %h3.general-subtitle Thank You for your Order!
+    %p.fw-300 An order confirmation has been has been sent to #{@order.user.email}
+  .row.mb-20
+    .col-sm-6
+      .visible-xs
+        = render 'checkout/order_info', order: @order
+      = render 'checkout/complete_address', address: @order.billing_address
+    .col-sm-6.hidden-xs.text-right
+      = render 'checkout/order_info', order: @order
+  .visible-xs
+    = render '/checkout/positions_mobile', positions: @order.positions
+  .hidden-xs.divider-lg.pt-20
+    = render '/checkout/positions_desktop', positions: @order.positions
+  .text-center.general-text-right
+    = render 'checkout/order_summary', order: @order
+  .text-center
+    = form_tag(root_path, method: :get) do
+      = submit_tag "Back to Store", class: "btn btn-default mb-20"

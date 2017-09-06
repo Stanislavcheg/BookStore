@@ -1,0 +1,27 @@
+
+%main.container.general-main-wrap
+  .text-center
+    %h3.general-login-title Log In
+    %a.general-login-icon{href: user_facebook_omniauth_authorize_path}
+      %i.fa.fa-facebook-official
+    %p.general-login-text or
+  = form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "general-form"}) do |f|
+    .form-group.mb-30.field
+      = f.label "Enter email", class: 'control-label input-label'
+      = f.email_field :email, autofocus: true, class: 'form-control', id: 'email', placeholder: "Enter email"
+    .form-group.mb-30.field
+      = f.label "Password", class: 'control-label input-label'
+      = f.password_field :password, autocomplete: "off", class: 'form-control', id: 'password', placeholder: "Password"
+      %a.help-block.in-gold-500{href: new_password_path('user')} Forgot password?
+    - if devise_mapping.rememberable?
+      .form-group.checkbox.text-center.mb-30.field
+        %label.checkbox-label
+          = f.check_box :remember_me, class: 'checkbox-input', hidden: "true"
+          %span.checkbox-icon
+            %i.fa.fa-check
+          = f.label :remember_me, class: 'checkbox-label checkbox-text'
+    .text-center
+      %button.btn.btn-default.mb-20 Back to Store
+  %p.general-sign-text.text-center
+    Don’t have an Account?
+    %a.in-gold-500{href: new_user_registration_path} Sign Up
