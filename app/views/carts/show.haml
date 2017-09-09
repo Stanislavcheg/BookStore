@@ -33,11 +33,11 @@
           .input-group.general-input-group
             = form_tag('/coupons/link_order', method: "put") do
               = label_tag :code, "Enter Your Coupon Code", class: "input-label"
-              = text_field_tag :code, "Enter Your Coupon Code", class: "form-control mb-30" 
+              = text_field_tag :code, "", placeholder: 'Enter Your Coupon Code', class: "form-control mb-30", id: 'update_cart_text'
               %div
-                = submit_tag "Update cart", class: "btn btn-primary mb-15 res-block"
+                = submit_tag "Update cart", class: "btn disabled mb-15 res-block", id:'update_cart_btn'
         .col-sm-8
-          .res-mr-200.text-center.general-text-right
+          .text-center.general-text-right
             %p.in-gold-500.font-18 Order Summary
             %table.general-summary-table.general-summary-table-right.general-text-right
               %tr
@@ -57,3 +57,4 @@
                   %strong.font-18= number_to_currency(current_order.total,:unit=>'€')
     = form_tag(checkout_url, method: "get") do
       = submit_tag 'Checkout', class: "btn btn-default mb-20 center-block"
+= csrf_meta_tags

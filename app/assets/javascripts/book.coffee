@@ -41,7 +41,8 @@ $(document).on('turbolinks:load',
 
     $("a.reduce_quantity").on("click", 
       ()->
-        quantity.val(parseInt(quantity.val()) - 1)
+        if quantity.val() > 0
+          quantity.val(parseInt(quantity.val()) - 1)
     )
 
 )

@@ -1,19 +1,12 @@
 class AddressesController < ApplicationController
   protected
 
-  def save_address(address, title)
-    route_address(address.save, title)
-  end
-
-  def update_address(address, address_params, title)
-    route_address(address.update(address_params), title)
-  end
-
-  def route_address(condition, title)
-    if condition
-      redirect_to root_path, notice: "#{title} successfully changed"
+  def process_form(form, address_identifier)
+    if form.valid?
+      yield
+      redirect_to edit_user_registration_path
     else
-      render edit_user_registration_path
+      render 'devise/registrations/edit', locals: { address_identifier => form }
     end
   end
 

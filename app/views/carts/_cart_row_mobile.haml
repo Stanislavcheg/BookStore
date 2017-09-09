@@ -3,7 +3,8 @@
     %span{'aria-hidden': "true"} &times;
   .general-img-wrap-table
     %img.cart-img-shadow{src: "http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg", alt: "design-book"}
-  %p.title= book.name
+  %p.title
+    = link_to book.name, book_path(book)
   %table.table
     %tr
       %td

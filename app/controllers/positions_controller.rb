@@ -1,4 +1,5 @@
 class PositionsController < ApplicationController
+  skip_before_action :verify_authenticity_token
   before_action :set_order
   before_action :check_same_position, only: [:create]
 

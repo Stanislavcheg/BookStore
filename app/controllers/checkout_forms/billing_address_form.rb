@@ -1,5 +1,4 @@
 class BillingAddressForm < AddressForm
-
   def save
     if valid?
       persist!

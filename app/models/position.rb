@@ -6,7 +6,7 @@ class Position < ApplicationRecord
   validate :book_present
   validate :order_present
 
-  before_save :finalize
+  before_save :finalize, :update_books_sold
 
   def unit_price
     if persisted?
@@ -35,5 +35,10 @@ class Position < ApplicationRecord
   def finalize
     self[:unit_price] = unit_price
     self[:total_price] = quantity * self[:unit_price]
+  end
+
+  def update_books_sold
+    book.sold = book.sold_count
+    book.save
   end
 end

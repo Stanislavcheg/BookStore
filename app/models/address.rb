@@ -1,5 +1,4 @@
 class Address < ApplicationRecord
-  validates :first_name, :last_name, presence: true
   belongs_to :addressable, polymorphic: true
 
   def full_name

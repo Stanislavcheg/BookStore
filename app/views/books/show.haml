@@ -6,17 +6,14 @@
     .col-sm-6
       .product-gallery
         .mb-20
-          %img.img-responsive{src: "https://www.bramstein.com/static/smashing-book-5-photo-stack.9d5d114e3e.jpg"}
+          %img.img-responsive{src: @book.images.first.url}
         .images.clearfix
-          %a.img-link{href: "#"}
-            %img{src: "https://www.smashingmagazine.com/wp-content/uploads/2015/09/smashing-book-5-2-large.jpg"}
-          %a.img-link{href: "#"}
-            %img{src: "https://www.smashingmagazine.com/wp-content/uploads/2015/09/smashing-book-5-2-large.jpg"}
-          %a.img-link{href: "#"}
-            %img{src: "https://www.smashingmagazine.com/wp-content/uploads/2015/09/smashing-book-5-2-large.jpg"}
+          - @book.images.slice(1, @book.images.size).each do |image|
+            %a.img-link{href: "#"}
+              %img{src: image.url}
     .col-sm-6
       %h1.mt-res-0= @book.name
-      %p.lead.small= @book.author
+      %p.lead.small= @book.authors_formated
       .row
         = form_for @position do |f|
           .col-xs-12.col-md-4

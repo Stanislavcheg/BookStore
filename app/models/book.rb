@@ -8,11 +8,21 @@ class Book < ApplicationRecord
   belongs_to :category
   has_many :positions
 
+  mount_uploaders :images, ImageUploader
+
   def short_description
     description.truncate(100, separator: ' ')
   end
 
   def price_euro
     number_to_currency price, unit: '€'
+  end
+
+  def sold_count
+    positions.inject(0){ |sum, position| sum + position.quantity }
+  end
+
+  def authors_formated
+    authors.join(", ")
   end
 end

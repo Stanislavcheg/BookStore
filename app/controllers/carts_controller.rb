@@ -1,5 +1,5 @@
 class CartsController < ApplicationController
-def show
+  def show
     @positions = current_order.positions
   end
 end

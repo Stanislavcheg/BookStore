@@ -3,21 +3,21 @@
   %p.lead.small.mb-10.visible-xs Sort by
   .dropdowns.dropdown.general-order-dropdown
     %a.dropdown-toggle.lead.small{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"}
-      All
+      = @filter_title
       %i.fa.fa-angle-down.dropdown-icon.pull-right
     %ul.dropdown-menu
       %li
-        %a{href: "#"} All
+        = link_to('All', orders_path)
       %li
-        %a{href: "#"} In progress
+        = link_to('In Progress', orders_path(order_status:'In Progress'))
       %li
-        %a{href: "#"} Waiting for processing
+        = link_to('Waiting for processing', orders_path(order_status:'Waiting for processing'))
       %li
-        %a{href: "#"} In delivery
+        = link_to('In Delivery', orders_path(order_status:'In Delivery'))
       %li
-        %a{href: "#"} Delivered
+        = link_to('Delivered', orders_path(order_status:'Delivered'))
       %li
-        %a{href: "#"} Canceled
+        = link_to('Canceled', orders_path(order_status:'Canceled'))
   .visible-xs
     = render 'orders_mobile', orders: @orders
   .hidden-xs.mb-res-50

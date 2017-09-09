@@ -3,7 +3,8 @@
     .general-img-wrap-table
       %img.cart-img-shadow.pull-left{src: "http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg", alt: "design-book"}
   %td
-    %p.title= book.name
+    %p.title
+      = link_to book.name, book_path(book)
   %td
     %span.font-16.in-gold-500= number_to_currency(book.price,:unit=>'€')
   %td

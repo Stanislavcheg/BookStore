@@ -55,6 +55,7 @@ end
 
 gem 'carrierwave', '~> 1.0'
 gem 'mini_magick'
+gem 'fog-aws'
 gem 'haml-rails'
 gem 'twitter-bootstrap-rails'
 gem 'jquery-rails'

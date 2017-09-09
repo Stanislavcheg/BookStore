@@ -5,7 +5,7 @@
 	%li
 		= sortable("Newest first", "created_at DESC", page_number, category)
 	%li
-		%a{href: "#"} Popular first
+		= sortable("Popular first", "sold DESC", page_number, category)
 	%li
 		= sortable("Price: Low to high", "price ASC", page_number, category)
 	%li
