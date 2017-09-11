@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'reviews/create'
+
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
@@ -9,7 +11,8 @@ Rails.application.routes.draw do
   resources :positions, only: [:create, :update, :destroy]
   resources :billing_addresses, only: [:create, :update]
   resources :shipping_addresses, only: [:create, :update]
-  resource :cart, only: [:show]
+  resources :reviews, only: :create
+  resource :cart, only: :show
   resources :books
   resources :categories do
     resources :books, only: :index

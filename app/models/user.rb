@@ -1,11 +1,12 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
+  devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable,
          omniauth_providers: [:facebook]
   validates_confirmation_of :password
   has_many :orders
+  has_many :reviews
   has_one :billing_address, as: :addressable, dependent: :destroy
   has_one :shipping_address, as: :addressable, dependent: :destroy
 
@@ -29,5 +30,4 @@ class User < ApplicationRecord
   def last_order
     orders.order("updated_at desc").limit(1).first
   end
-
 end

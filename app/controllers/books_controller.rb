@@ -5,6 +5,7 @@ class BooksController < ApplicationController
   before_action :set_all_books, only: :index
 
   def show
+    @review = Review.new(book_id: @book.id, user_id: current_user.id, title: current_user.name)
   end
 
   def index

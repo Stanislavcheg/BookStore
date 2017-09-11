@@ -16,6 +16,10 @@ class Order < ApplicationRecord
   scope :delivered, -> { joins(:order_status).where('order_statuses.name = ?', 'Delivered') }
   scope :canceled, -> { joins(:order_status).where('order_statuses.name = ?', 'Canceled') }
 
+  def includes_book?(book)
+    positions.map(&:book).include?(book)
+  end
+
   def name
     "Order: #{order_number} #{order_status}"
   end

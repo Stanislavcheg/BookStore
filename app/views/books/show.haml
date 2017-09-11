@@ -45,36 +45,26 @@
           %p.pull-left Materials
           %p.lead.small.pull-right= @book.materials
   .mb-80
-    %h3.in-gold-500.mb-25 Reviews (3)
-    .general-message-wrap.divider-lg
+    %h3.in-gold-500.mb-25 Reviews (#{@book.reviews.approved.count})
+    - if @book.reviews.approved.any?
+      = render 'reviews/reviews', reviews: @book.reviews.approved   
+    - else
+      .general-message-wrap.divider-lg
       .clearfix
-        %img.img-circle.logo-size.inlide-block.pull-left{src: "https://www.smashingmagazine.com/wp-content/uploads/2015/09/smashing-book-5-2-large.jpg"}
-        .ml-70
-          %div
-            .general-message-date.hidden-xs 11/11/16
-            .max-240
-              .general-message-verified Verified Reviewer
-              .general-message-name Rita J. Lewis
-          .mb-15
-            %i.fa.fa-star.rate-star
-            %i.fa.fa-star.rate-star
-            %i.fa.fa-star.rate-star
-            %i.fa.fa-star.rate-star
-            %i.fa.fa-star.rate-star
-          %p Thank you BookStore, I was very pleased to receive my order for the Moleskine diary so soon after placing the order.
-    .general-message-wrap.divider-lg
-      .clearfix
-        %span.img-circle.logo-size.inlide-block.pull-left.logo-empty M
-        .ml-70
-          %div
-            .general-message-date.hidden-xs 11/11/16
-            .max-240
-              .general-message-verified.pull-right Verified Reviewer
-              .general-message-name May J. Novoa
-          .mb-15
-            %i.fa.fa-star.rate-star
-            %i.fa.fa-star.rate-star
-            %i.fa.fa-star.rate-star
-            %i.fa.fa-star.rate-star
-            %i.fa.fa-star.rate-star.rate-empty
-          %p If ‘Get a better job’ had landed on my desk a year ago, I might have been dismissive of it. Instead I was prepared to be open-minded. There have been many occasions where I turned to career books with practical activities to look for some inspiration when developing education activities for learners or assessment.
+    - if current_user
+      %h3.in-gold-500.mb-25 Write a Review 
+      .col-md-6.col-md-offset-3
+        = simple_form_for @review  do |f|
+          .form-group
+            = f.input :title, autofocus: true, label: 'Full Name', class: "form-control", placeholder: "Full Name", label_html: { class: 'control-label input-label' }
+          .form-group
+            = f.input :rating, label: 'Rating', class: "form-control", collection: 1..5, include_blank: false, label_html: { class: 'control-label input-label' }
+          .form-group
+            = f.input :description, label: 'Description',input_html: {rows: 5}, class: "form-control", placeholder: "Description", label_html: { class: 'control-label input-label' }
+            = f.input :user_id, as: :hidden
+            = f.input :book_id, as: :hidden
+          .text-center.general-text-align
+            = f.button :submit, "Save", class: "btn btn-default"
+    .clearfix
+
+            
