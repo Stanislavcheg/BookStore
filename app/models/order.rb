@@ -29,7 +29,7 @@ class Order < ApplicationRecord
   end
 
   def discount
-    self.coupon.try(:discount).to_i * subtotal || 0
+    coupon.try(:discount).to_f * subtotal || 0
   end
 
   def total

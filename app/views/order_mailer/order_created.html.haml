@@ -1,0 +1,13 @@
+%p Thank you #{@user.email} for your order at the Makhno BookStore!
+
+%p Your order number is: #{@order.order_number}
+
+%P Books:
+
+%ul
+  - @order.positions.each do |position|
+    %li= position.book.name
+
+%p For more details visit Makhno BookStore through the link below:
+
+%p= link_to "View order", order_url(@order)

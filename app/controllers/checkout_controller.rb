@@ -15,6 +15,7 @@ class CheckoutController < ApplicationController
       if session[:prev_step_done]
         link_current_order_to_user
         @order = current_user.last_order
+        OrderMailer.order_created(@order, current_user).deliver_later
         session[:order_id] = nil
         session[:prev_step_done] = nil
       end
