@@ -1,10 +1,10 @@
 FactoryGirl.define do
   factory :review do
-    title "MyString"
+    title { user.name || "MyString" }
     description "MyText"
-    rating 1
-    status "MyString"
-    book nil
-    user nil
+    rating 5
+    status "Review status"
+    book
+    user
   end
 end

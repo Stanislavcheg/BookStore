@@ -1,9 +1,9 @@
 FactoryGirl.define do
   factory :position do
-    book nil
-    order nil
-    unit_price 1.5
-    quantity 1
-    total_price 1.5
+    book
+    order
+    unit_price { book.price }
+    quantity { FFaker::Random.rand(1..10) }
+    total_price { unit_price * quantity }
   end
 end

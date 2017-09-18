@@ -1,3 +1,11 @@
+GIT
+  remote: https://github.com/thoughtbot/shoulda-matchers.git
+  revision: edaf9cb926ee9c59c59729e7a4f8c206b44da8a1
+  branch: rails-5
+  specs:
+    shoulda-matchers (3.1.2)
+      activesupport (>= 4.2.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -120,6 +128,7 @@ GEM
       railties (>= 3.0.0)
     faraday (0.12.2)
       multipart-post (>= 1.2, < 3)
+    ffaker (2.6.0)
     ffi (1.9.18)
     fog-aws (1.4.1)
       fog-core (~> 1.38)
@@ -321,8 +330,6 @@ GEM
       childprocess (~> 0.5)
       rubyzip (~> 1.0)
     sexp_processor (4.10.0)
-    shoulda-matchers (3.1.2)
-      activesupport (>= 4.0.0)
     simple_form (3.5.0)
       actionpack (> 4, < 5.2)
       activemodel (> 4, < 5.2)
@@ -392,6 +399,7 @@ DEPENDENCIES
   devise
   dotenv-rails
   factory_girl_rails
+  ffaker
   fog-aws
   haml-rails
   jbuilder (~> 2.5)
@@ -406,7 +414,7 @@ DEPENDENCIES
   rspec-rails (~> 3.6)
   sass-rails (~> 5.0)
   selenium-webdriver
-  shoulda-matchers
+  shoulda-matchers!
   simple_form
   spring
   spring-watcher-listen (~> 2.0.0)

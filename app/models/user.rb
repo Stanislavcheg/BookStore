@@ -4,7 +4,6 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable,
          omniauth_providers: [:facebook]
-  validates_confirmation_of :password
   has_many :orders
   has_many :reviews
   has_one :billing_address, as: :addressable, dependent: :destroy

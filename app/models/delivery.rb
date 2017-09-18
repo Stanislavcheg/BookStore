@@ -3,6 +3,6 @@ class Delivery < ApplicationRecord
   validates :method, :days, :price, presence: true
 
   def to_s
-    '#{method} #{days}'
+    "#{method} #{days}"
   end
 end

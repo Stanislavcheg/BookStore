@@ -54,7 +54,9 @@ ActiveAdmin.register Book do
       f.input :price
       f.input :category
       f.input :materials
-      f.input :dimensions
+      f.input :height
+      f.input :width
+      f.input :depth
       f.input :year
       hint = f.object.images.map{|i| image_tag(i.url(:thumb)) }.join.html_safe
       f.input :images, as: :file, required: true, input_html: { multiple: true }, hint: hint

@@ -25,7 +25,7 @@ class Order < ApplicationRecord
   end
 
   def subtotal
-    positions.collect { |pos| pos.valid? ? (pos.quantity * pos.unit_price) : 0 }.sum
+    positions.collect { |pos| pos.valid? ? pos.total_price : 0 }.sum
   end
 
   def discount

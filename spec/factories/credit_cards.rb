@@ -1,9 +1,9 @@
 FactoryGirl.define do
   factory :credit_card do
-    number ""
-    name "MyString"
-    expires "MyString"
-    cvv 1
-    order nil
+    number '1234567890123456'
+    name { FFaker::Name.name }
+    expires '10/20'
+    cvv 111
+    order
   end
 end

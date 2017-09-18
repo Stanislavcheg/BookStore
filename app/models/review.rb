@@ -4,8 +4,9 @@ class Review < ApplicationRecord
 
   validates :title, :rating, :description, presence: true
   validates :rating, inclusion: { in: 1..5 }
+  validates :title, length: { maximum: 80 }
   validates :description, length: { maximum: 500 }
-  validates :description, format: { with: /\A[a-zA-Z\d\s]+[-!#$%&'*+\/=?^_`{|}~.,]?[a-zA-Z\d\s]*\z/ }
+  validates :description, :title, format: { with: /\A[a-zA-Z\d\s!#$%&'*+\/=?^_`{|}~.,-]+\z/ }
 
   scope :unprocessed, -> { where('status = ?', 'Unprocessed') }
   scope :processed, -> { where('status IN (?)', ['Approved', 'Rejected']) }

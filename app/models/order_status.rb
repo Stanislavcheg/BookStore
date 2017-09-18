@@ -1,9 +1,6 @@
 class OrderStatus < ApplicationRecord
+  validates :name, presence: true, uniqueness: true
   has_many :orders
-
-  def to_s
-    name
-  end
 
   def available_statuses
     @exclude_list = ['In Progress', 'Waiting for processing']
