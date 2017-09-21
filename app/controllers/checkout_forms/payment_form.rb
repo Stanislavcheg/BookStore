@@ -6,6 +6,10 @@ class PaymentForm < Rectify::Form
   attribute :cvv, String
 
   validates :number, :name, :expires, :cvv, presence: true
+  validates :cvv, format: { with: /\A\d{3,4}\z/ }
+  validates :number, format: { with: /\A\d{16}\z/ }
+  validates :name, format: { with: /\A[a-zA-Z ]+\z/ }
+  validates :expires, format: { with: /\A(0[1-9]|1[0-2])\/(\d{2})\z/ }
 
   def save
     if valid?

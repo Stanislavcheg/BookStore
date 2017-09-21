@@ -3,7 +3,12 @@ class CouponsController < ApplicationController
   def link_order
     unless current_order.coupon
       @coupon = Coupon.find_by(code: params[:code])
-      @coupon.orders << current_order
+      if @coupon
+        @coupon.orders << current_order
+      else
+        flash[:error] = 'There is no such code'
+        return render 'carts/show'
+      end
     end
     redirect_to cart_path
   end

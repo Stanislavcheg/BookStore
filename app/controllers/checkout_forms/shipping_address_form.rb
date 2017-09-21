@@ -1,5 +1,4 @@
 class ShippingAddressForm < AddressForm
-
   def save
     if valid?
       persist!

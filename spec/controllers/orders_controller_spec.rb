@@ -1,19 +1,50 @@
 require 'rails_helper'
 
 RSpec.describe OrdersController, type: :controller do
+  describe 'unauthorized user' do
+    describe 'GET :index' do
+      it 'redirects user to login page' do
+        get :index
+        expect(response).to redirect_to(new_user_session_url)
+      end
+    end
+    describe 'GET :show' do
+      let(:order) { FactoryGirl.create(:order) }
 
-  describe "GET #show" do
-    it "returns http success" do
-      get :show
-      expect(response).to have_http_status(:success)
+      it 'redirects user to login page' do
+        get :show, params: { id: order.id }
+        expect(response).to redirect_to(new_user_session_url)
+      end
     end
   end
+  describe 'logged user' do
+    describe 'GET :index' do
+      let(:user) { FactoryGirl.create(:user_with_orders) }
 
-  describe "GET #index" do
-    it "returns http success" do
-      get :index
-      expect(response).to have_http_status(:success)
+      before do
+        sign_in user
+      end
+
+      it 'renders :index template' do
+        get :index
+        expect(response).to render_template(:index)
+      end
+      context "when user has orders" do
+        it 'assigns all user orders to the template' do
+          get :index
+          expect(assigns(:orders)).to match_array(user.orders)
+        end
+        context 'when filter is chosen' do
+          it 'assigns only filtered orders to the template' do
+            order = subject.current_user.orders.first
+            order.order_status = OrderStatus.where(name: 'In delivery').first
+            order.save
+            get :index, params: { order_status: 'In delivery' }
+            expect(assigns(:orders).count).to eq(1)
+            expect(assigns(:orders).first).to eq(order)
+          end
+        end
+      end
     end
   end
-
 end

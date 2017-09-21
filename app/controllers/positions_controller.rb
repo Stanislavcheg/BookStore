@@ -7,7 +7,7 @@ class PositionsController < ApplicationController
     @position = @order.positions.new(position_params)
     @order.save!
     session[:order_id] = @order.id
-    redirect_to request.referrer
+    redirect_to request.referrer || root_path
   end
 
   def update

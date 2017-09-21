@@ -11,13 +11,13 @@ Rails.application.routes.draw do
   resources :positions, only: [:create, :update, :destroy]
   resources :billing_addresses, only: [:create, :update]
   resources :shipping_addresses, only: [:create, :update]
+  resources :checkout, only: [:show, :update]
   resources :reviews, only: :create
   resource :cart, only: :show
   resources :books
-  resources :categories do
+  resources :categories, only: [] do
     resources :books, only: :index
   end
-  resources :checkout
 
   put '/users/edit_email/:id', to: 'users#update_email'
   put '/coupons/link_order', to: 'coupons#link_order'
