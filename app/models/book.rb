@@ -2,7 +2,7 @@ class Book < ApplicationRecord
   include ActionView::Helpers::NumberHelper
 
   validates :name, :price, :description, presence: true
-  validates :height, :width, :depth, :price, :year, numericality: { greater_than: 0 }
+  validates :height, :width, :depth, :price, :year, numericality: { greater_than_or_equal_to: 0.01 }
   has_and_belongs_to_many :authors
   belongs_to :category
   has_many :positions

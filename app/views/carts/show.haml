@@ -1,11 +1,6 @@
-- if !@position.nil? && @position.errors.any?
-  .alert.alert-danger
-    %ul
-      - @position.errors.full_messages.each do |msg| 
-        %li= msg 
 %main.container.general-main-wrap
   %h1.general-title-margin Cart
-  - if @positions.size == 0
+  - if @positions.size == 0 || @positions.nil?
     %p.text-center
       There are no items in your shopping cart.  Please #{link_to("go back", root_path)} and add some items to your cart.
   - else
@@ -32,7 +27,7 @@
         .col-sm-4
           .input-group.general-input-group
             = form_tag('/coupons/link_order', method: "put") do
-              = label_tag :code, "Enter Your Coupon Code", class: "input-label"
+              = label_tag :code, "Enter Your Coupon Code", class: "input-label", id: 'update_cart_lbl'
               = text_field_tag :code, "", placeholder: 'Enter Your Coupon Code', class: "form-control mb-30", id: 'update_cart_text'
               %div
                 = submit_tag "Update cart", class: "btn disabled mb-15 res-block", id:'update_cart_btn'
@@ -55,6 +50,6 @@
                   %strong.font-18 Order Total:
                 %td
                   %strong.font-18= number_to_currency(current_order.total,:unit=>'€')
-    = form_tag(checkout_url, method: "get") do
+    = form_tag(checkout_url("address"), method: "get") do
       = submit_tag 'Checkout', class: "btn btn-default mb-20 center-block"
 = csrf_meta_tags

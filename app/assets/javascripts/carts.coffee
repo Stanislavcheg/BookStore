@@ -23,6 +23,16 @@ $(document).on('turbolinks:load',
         })
     )
 
+    $(".quantity-input").on('change',
+      ()->
+        quantity = $(this)[0]
+        $.ajax({
+          type: "PATCH",
+          url: "/positions/#{quantity.id.split('_')[1]}",
+          data: {position: {quantity: $(quantity).val()}}
+        })
+    )
+
     $(".neg-quantity").on("click",
       ()->
         quantity = $(this).parent().find(".quantity-input")[0]

@@ -6,7 +6,8 @@ class CouponsController < ApplicationController
       if @coupon
         @coupon.orders << current_order
       else
-        flash[:error] = 'There is no such code'
+        flash.now[:alert] = 'There is no such code'
+        @positions = current_order.positions
         return render 'carts/show'
       end
     end

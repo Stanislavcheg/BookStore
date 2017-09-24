@@ -29,4 +29,4 @@
     = render 'checkout/order_summary', order: current_order
   .text-center#confirm_submit
     = form_tag(next_wizard_path, method: :get) do
-      = submit_tag "Place Order", class: "btn btn-default mb-20"
+      = submit_tag "Place Order", class: "btn btn-default mb-20 submit"

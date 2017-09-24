@@ -15,7 +15,7 @@
       %tr
         %td
           .general-img-wrap-table
-            %img.cart-img-shadow.pull-left{src: position.book.images.first.url, alt: position.book.name}
+            %img.cart-img-shadow.pull-left{src: position.book.images.first.try(:url), alt: position.book.name}
         %td
           %p.title= position.book.name
           %p.in-grey-600.fw-300= position.book.short_description

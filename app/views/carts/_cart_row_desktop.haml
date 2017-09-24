@@ -1,7 +1,7 @@
-%tr
+%tr{id: "pos#{position.id}"}
   %td
     .general-img-wrap-table
-      %img.cart-img-shadow.pull-left{src: book.images.first.url, alt: book.name}
+      %img.cart-img-shadow.pull-left{src: book.images.first.try(:url), alt: book.name}
   %td
     %p.title
       = link_to book.name, book_path(book)
@@ -18,4 +18,4 @@
     %span.font-16.in-gold-500= number_to_currency(position.total_price,:unit=>'€')
   %td
     %button.close.general-cart-close{type: "button", 'aria-label': "Close", id: "close_#{position.id}"}
-      %span{'aria-hidden': "true"} &times; 
+      %span.remove{'aria-hidden': "true"} &times; 

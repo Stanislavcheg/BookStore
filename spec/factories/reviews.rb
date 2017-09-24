@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :review do
-    description "MyText"
+    description { FFaker::Lorem.phrase }
     rating 5
     status "Review status"
     book
