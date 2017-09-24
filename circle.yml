@@ -4,6 +4,8 @@ machine:
       2.4.1
   environment:
       DEVISE_SECRET: 'secret key is here'
+      AWS_ACCESS_KEY_ID: 'secret key id is here'
+      AWS_SECRET_ACCESS_KEY: 'secret access key is here'
 
 dependencies:
   pre:
