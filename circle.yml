@@ -25,7 +25,7 @@ database:
   override:
     # replace CircleCI's generated database.yml
     - cp config/database.ci.yml config/database.yml
-    - bundle exec rake db:create db:schema:load
+    - bundle exec rake db:setup
 
 ## Customize test commands
 test:
