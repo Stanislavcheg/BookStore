@@ -14,5 +14,5 @@
   .form-group.mb-60
     = f.input :phone, label: 'Phone', class: "form-control", id: "#{address.to_s}_phone", placeholder: "Example +355 66 123 4567", label_html: { class: 'control-label input-label' }
   .text-center.general-text-align
-    = f.input :type, as: :hidden, input_html: { value: address.to_sym }
+    = f.input :type, as: :hidden, input_html: { value: address.to_s }
     = f.button :submit, "Save", class: "btn btn-default"
