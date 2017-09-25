@@ -4,7 +4,8 @@ class Position < ApplicationRecord
 
   validates :quantity, presence: true, numericality: { greater_than: 0 }
 
-  before_save :finalize, :set_sold
+  before_save :finalize
+  after_save :set_sold
 
   def unit_price
     if persisted?
