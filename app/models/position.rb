@@ -4,7 +4,7 @@ class Position < ApplicationRecord
 
   validates :quantity, presence: true, numericality: { greater_than: 0 }
 
-  before_save :finalize
+  before_save :finalize, :set_sold
 
   def unit_price
     if persisted?
@@ -23,5 +23,9 @@ class Position < ApplicationRecord
   def finalize
     self[:unit_price] = unit_price
     self[:total_price] = quantity * self[:unit_price]
+  end
+
+  def set_sold
+    book.update_attributes(sold: book.sold_count)
   end
 end
