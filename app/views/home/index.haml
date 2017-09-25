@@ -40,7 +40,7 @@
             .col-sm-6.col-md-3
               .general-thumb-wrap
                 .thumbnail.general-thumbnail
-                  %img.img-shadow.general-thumbnail-img{src: book.images.try(:url), alt: book.name}
+                  %img.img-shadow.general-thumbnail-img{src: book.images.first.try(:url), alt: book.name}
                   .thumb-hover
                     .general-thumb-link-wrap
                       = link_to book_path(book), class: 'thumb-hover-link' do
