@@ -6,7 +6,6 @@ RSpec.describe Order, type: :model do
   let(:position) { FactoryGirl.create(:position) }
 
   describe 'associations' do
-    it { is_expected.to belong_to(:order_status) }
     it { is_expected.to belong_to(:coupon) }
     it { is_expected.to belong_to(:user) }
     it { is_expected.to belong_to(:delivery) }
@@ -19,7 +18,7 @@ RSpec.describe Order, type: :model do
   describe 'instance methods' do
     context 'when instance created' do
       it 'sets status to pending' do
-        expect(order.order_status_id).to eq(1)
+        expect(order.order_status).to eq("in_progress")
       end
 
       it 'sets order number' do

@@ -18,7 +18,7 @@ class Review < ApplicationRecord
 
   def verified?
     user.orders.any? do |order|
-      order.includes_book?(book) && order.order_status.name == 'Delivered'
+      order.includes_book?(book) && order.order_status == 'delivered'
     end
   end
 end

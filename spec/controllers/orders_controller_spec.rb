@@ -37,9 +37,9 @@ RSpec.describe OrdersController, type: :controller do
         context 'when filter is chosen' do
           it 'assigns only filtered orders to the template' do
             order = subject.current_user.orders.first
-            order.order_status = OrderStatus.where(name: 'In delivery').first
+            order.order_status = 'in_delivery'
             order.save
-            get :index, params: { order_status: 'In delivery' }
+            get :index, params: { order_status: 'in_delivery' }
             expect(assigns(:orders).count).to eq(1)
             expect(assigns(:orders).first).to eq(order)
           end

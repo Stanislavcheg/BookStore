@@ -2,7 +2,6 @@ class Order < ApplicationRecord
   before_validation :set_order_status
   before_save :update_subtotal, :update_total
   before_create :set_order_number
-  belongs_to :order_status
   belongs_to :coupon, optional: true
   belongs_to :user, optional: true
   belongs_to :delivery, optional: true
@@ -11,10 +10,11 @@ class Order < ApplicationRecord
   has_one :shipping_address, as: :addressable, dependent: :destroy
   has_one :credit_card, dependent: :destroy
 
-  scope :in_progress, -> { joins(:order_status).where('order_statuses.name IN (?)',
-  ['In Progress', 'Waiting for processing', 'In Delivery']) }
-  scope :delivered, -> { joins(:order_status).where('order_statuses.name = ?', 'Delivered') }
-  scope :canceled, -> { joins(:order_status).where('order_statuses.name = ?', 'Canceled') }
+  enum order_status: { in_progress: 0, in_queue: 1, in_delivery: 2, delivered: 3, canceled: 4 }
+
+  scope :in_progress, -> { where(order_status: [:in_progress, :in_queue, :in_delivery]) }
+  scope :delivered, -> { where(order_status: :delivered) }
+  scope :canceled, -> { where(order_status: :canceled) }
 
   def includes_book?(book)
     positions.map(&:book).include?(book)
@@ -36,10 +36,16 @@ class Order < ApplicationRecord
     self[:total] = subtotal - discount + self.delivery.try(:price).to_f
   end
 
+  def available_statuses
+    @exclude_list = ['in_progress']
+    @exclude_list << 'delivered' unless self.order_status == "in_delivery"
+    Order.order_statuses.keys - @exclude_list
+  end
+
 private
 
   def set_order_status
-    self[:order_status_id] ||= 1
+    self.order_status ||= 0
   end
 
   def update_subtotal

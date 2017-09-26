@@ -41,7 +41,7 @@ RSpec.describe Review, type: :model do
         order.positions << FactoryGirl.create(:position, book: review.book)
         order.positions << FactoryGirl.create(:position)
         order.user = review.user
-        order.order_status = OrderStatus.where(name: "Delivered").first
+        order.order_status = "delivered"
         order.save
         expect(review.verified?).to be_truthy
       end

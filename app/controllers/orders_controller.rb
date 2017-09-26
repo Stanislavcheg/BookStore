@@ -6,8 +6,8 @@ class OrdersController < ApplicationController
   end
 
   def index
-    @filter_title = params[:order_status] || "All"
+    @filter_title = params[:filter_title] || "All"
     @orders = current_user.orders
-    @orders = @orders.select{ |order| order.order_status.name == params[:order_status] } if params[:order_status]
+    @orders = @orders.select{ |order| order.order_status == params[:order_status] } if params[:order_status]
   end
 end
