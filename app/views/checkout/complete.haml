@@ -1,5 +1,6 @@
 %main.container.general-main-wrap
   = render 'checkout/steps_panel'
+   = hidden_field_tag("step_name", "Complete")
   .text-center.mb-40
     %h3.general-subtitle Thank You for your Order!
     %p.fw-300 An order confirmation has been has been sent to #{@order.user.email}

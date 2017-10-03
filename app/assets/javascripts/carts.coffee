@@ -1,56 +1,51 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
-
 $(document).on('turbolinks:load',
   () ->
 
-    $("button.close").on("click", 
+    $("button.close").on("click",
       ()->
+        id = $(this).data("position")
         $.ajax({
           type: "DELETE",
-          url: "/positions/#{this.id.split('_')[1]}"
+          url: "/positions/#{id}"
         })
     )
 
     $(".pos-quantity").on("click",
       ()->
-        quantity = $(this).parent().find(".quantity-input")[0]
+        quantity_input = $(this).parent().find(".quantity-input")
+        id = quantity_input.data("position")
         $.ajax({
           type: "PATCH",
-          url: "/positions/#{quantity.id.split('_')[1]}",
-          data: {position: {quantity: (parseInt($(quantity).val()) + 1)}}
+          url: "/positions/#{id}",
+          data: {position: {quantity: (parseInt(quantity_input.val()) + 1)}}
         })
     )
 
     $(".quantity-input").on('change',
       ()->
-        quantity = $(this)[0]
+        quantity = $(this).val()
+        id = $(this).data("position")
         $.ajax({
           type: "PATCH",
-          url: "/positions/#{quantity.id.split('_')[1]}",
-          data: {position: {quantity: $(quantity).val()}}
+          url: "/positions/#{id}",
+          data: {position: {quantity: quantity}}
         })
     )
 
     $(".neg-quantity").on("click",
       ()->
-        quantity = $(this).parent().find(".quantity-input")[0]
+        quantity_input = $(this).parent().find(".quantity-input")
+        id = quantity_input.data("position")
         $.ajax({
           type: "PATCH",
-          url: "/positions/#{quantity.id.split('_')[1]}",
-          data: {position: {quantity: (parseInt($(quantity).val()) - 1)}}
+          url: "/positions/#{id}",
+          data: {position: {quantity: (parseInt(quantity_input.val()) - 1)}}
         })
     )
 
-    $('#update_cart_text').on('change', 
+    $('#update_cart_text').on('change',
       ()->
-        if $(this).val()
-          $('#update_cart_btn').removeClass("disabled")
-          $('#update_cart_btn').addClass("btn-primary")
-        else
-          $('#update_cart_btn').addClass("disabled")
-          $('#update_cart_btn').removeClass("btn-primary")
-          
+        $('#update_cart_btn').toggleClass("disabled")
+        $('#update_cart_btn').toggleClass("btn-primary")
     )
 )

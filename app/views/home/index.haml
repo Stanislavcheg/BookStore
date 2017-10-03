@@ -45,7 +45,7 @@
                     .general-thumb-link-wrap
                       = link_to book_path(book), class: 'thumb-hover-link' do
                         %i.fa.fa-eye.thumb-icon{'aria-hidden': "true"}
-                      = link_to positions_path(position: {quantity: 1, book_id: book.id}), { method: :post, remote: true, class: 'thumb-hover-link buy' } do
+                      = link_to positions_path(position: {quantity: 1, book_id: book.id}), { method: :post, remote: true, class: 'thumb-hover-link' } do
                         %i.fa.fa-shopping-cart.thumb-icon
               .mb-35
                 .clearfix

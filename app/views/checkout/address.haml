@@ -1,5 +1,6 @@
 %main.container
   = render 'checkout/steps_panel'
+  = hidden_field_tag("step_name", "Address")
   = simple_form_for @addresses_form, url: wizard_path, method: :put do |f|
     %form.res-mb-100
       .hidden-xs.hidden-sm

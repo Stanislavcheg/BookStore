@@ -26,6 +26,7 @@ gem 'wicked'
 gem 'simple_form'
 gem 'country_select'
 gem 'activeadmin'
+gem "i18n-js"
 
 
 group :development, :test do

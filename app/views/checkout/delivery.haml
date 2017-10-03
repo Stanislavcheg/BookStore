@@ -1,5 +1,6 @@
 %main.container.general-main-wrap
   = render 'checkout/steps_panel'
+  = hidden_field_tag("step_name", "Delivery")
   = simple_form_for @delivery_form, url: wizard_path, method: :put do |f|
     %h3.general-subtitle Delivery
     .visible-xs

@@ -8,15 +8,15 @@ class ApplicationController < ActionController::Base
   end
 
   def current_order
-    unless session[:order_id].nil?
+    if session[:order_id].nil?
+      Order.new
+    else
       begin
         Order.find(session[:order_id])
       rescue
         session[:order_id] = nil
         Order.new
       end
-    else
-      Order.new
     end
   end
 

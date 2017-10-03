@@ -1,5 +1,6 @@
 %main.container.mb-res-50
   = render 'checkout/steps_panel'
+  = hidden_field_tag("step_name", "Payment")
   = simple_form_for @payment_form, url: wizard_path, method: :put do |f|
     %h3.general-subtitle Credit Card
     %div.max-600.mb-80

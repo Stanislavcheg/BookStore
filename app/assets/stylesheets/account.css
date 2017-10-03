@@ -1,9 +1,9 @@
 div.remove-box {
-	display: flex; 
-  align-items: center; 
+  display: flex;
+  align-items: center;
 }
 
 #remove-acc-button {
-	position: relative;
-	top: 4px;
+  position: relative;
+  top: 4px;
 }
