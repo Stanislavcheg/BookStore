@@ -14,10 +14,10 @@
             .col-sm-7
               .mb-60
                 %h1= book.name
-                %p.lead.more= book.short_description
-                %p.lead.small= book.authors.first
+                %p.lead= book.short_description
+                %p.lead.small= book.decorate.authors_formated
                 .general-align
-                = button_to 'Buy Now', positions_path(position: {quantity: 1, book_id: book.id}), class: 'btn btn-primary', remote: true, method: :post
+                = button_to 'Buy Now', positions_path(position: {quantity: 1, book_id: book.id}), class: 'btn btn-primary buy', remote: true, method: :post
     %a.left.carousel-control{href: "#slider", role: "button", 'data-slide': "prev"}
       %span.icon-prev{'aria-hidden': "true"}
       %span.sr-only Previous
@@ -33,7 +33,7 @@
       = submit_tag "Get Started", class: "btn btn-default", id: "get-started"
   .mb-35#best_sellers
     %h3 Best Sellers
-    - categories.map(&:best_seller).each_slice(4) do |books_row|
+    - Category.all.map(&:best_seller).each_slice(4) do |books_row|
       .row
         - books_row.each do |book|
           - if book.present?
@@ -45,11 +45,11 @@
                     .general-thumb-link-wrap
                       = link_to book_path(book), class: 'thumb-hover-link' do
                         %i.fa.fa-eye.thumb-icon{'aria-hidden': "true"}
-                      = link_to positions_path(position: {quantity: 1, book_id: book.id}), { method: :post, remote: true, class: 'thumb-hover-link' } do
+                      = link_to positions_path(position: {quantity: 1, book_id: book.id}), { method: :post, remote: true, class: 'thumb-hover-link buy' } do
                         %i.fa.fa-shopping-cart.thumb-icon
               .mb-35
                 .clearfix
-                  %p.pull-right.font-16.in-gold-500= book.price_euro
+                  %p.pull-right.font-16.in-gold-500= book.decorate.price_euro
                   %p.title.mr-55= book.name
                 %span.divider-sm
-                %p.lead.small= book.authors_formated
+                %p.lead.small= book.decorate.authors_formated

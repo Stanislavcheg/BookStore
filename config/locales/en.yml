@@ -1,5 +1,23 @@
 en:
+  user:
+    errors:
+      invalid_email: "Email is not valid"
+    notice:
+      email_changed: "Email was successfully changed"
   book:
     description:
       read_more: "Read more"
       hide: "Hide"
+    default_sort:
+      title: "Newest first"
+      criteria: "created_at"
+  coupon:
+    errors:
+      no_code: "There is no such code"
+  review:
+    notice:
+      on_create: "Thanks for Review. It will be published as soon as Admin will approve it."
+  order_mailer:
+    subject: "Thank you for order!"
+  user_mailer:
+    greeting: "Hi"

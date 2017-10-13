@@ -36,23 +36,27 @@ RSpec.describe Order, type: :model do
       it "sets subtotal as a sum of position's prices" do
         position2 = FactoryGirl.create(:position)
         order.positions << [position, position2]
+        order.save
         expect(order.subtotal).to eq(position.total_price + position2.total_price)
       end
 
       it 'updates total' do
         total_before = order.total
         order.positions << position
+        order.save
         expect(order.total).not_to eq(total_before)
       end
 
       it "sets total as a sum of subtotal and delivery costs" do
         order_with_positions.delivery = FactoryGirl.create(:delivery)
+        order.reload
         expect(order_with_positions.total).to eq(order_with_positions.subtotal +
         order_with_positions.delivery.price)
       end
 
       it 'calculates the discount if coupon is present' do
         order_with_positions.coupon = FactoryGirl.create(:coupon)
+        order.reload
         expect(order_with_positions.total).to eq(order_with_positions.subtotal -
         order_with_positions.subtotal*order_with_positions.coupon.discount)
       end

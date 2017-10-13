@@ -25,13 +25,13 @@ RSpec.describe BooksController, type: :controller do
     context "when category isn't chosen" do
       it 'assigns all books to template' do
         get :index
-        expect(assigns(:books)).to match_array(books + category.books)
+        expect(assigns(:book_presenter).books).to match_array(books + category.books)
       end
     end
     context "when category is chosen" do
       it 'assigns books only of chosen category to template' do
         get :index, params: {category_id: category.id}
-        expect(assigns(:books)).to match_array(category.books)
+        expect(assigns(:book_presenter).books).to match_array(category.books)
       end
     end
   end

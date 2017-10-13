@@ -3,9 +3,9 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
 
     if @user.update(user_params)
-      redirect_to edit_user_registration_path, notice: "Email was successfully changed"
+      redirect_to edit_user_registration_path, notice: t('user.notice.email_changed')
     else
-      render 'devise/registrations/edit', error: "Email is not valid"
+      render 'devise/registrations/edit', error: t('user.errors.invalid_email')
     end
   end
 

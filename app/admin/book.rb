@@ -1,6 +1,6 @@
 ActiveAdmin.register Book do
   includes :authors, :category
-  permit_params :id, :name, :price, :description, :year, :dimensions,
+  permit_params :id, :name, :price, :description, :year, :height, :width, :depth,
   :materials, :category_id, {images:[]}, author_ids: []
 
   filter :name
@@ -31,15 +31,17 @@ ActiveAdmin.register Book do
       end
       row :name
       row 'Authors' do |book|
-        (book.authors.map{ |author| author.to_s }).join(', ').html_safe
+        book.decorate.authors_formated
       end
       row :description
       row 'Price' do |book|
-        book.price_euro
+        book.decorate.price_euro
       end
       row :category
       row :materials
-      row :dimensions
+      row 'Dimensions' do |book|
+        book.decorate.dimensions
+      end
       row :year
       row :created_at
       row :updated_at

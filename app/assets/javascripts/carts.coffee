@@ -14,10 +14,11 @@ $(document).on('turbolinks:load',
       ()->
         quantity_input = $(this).parent().find(".quantity-input")
         id = quantity_input.data("position")
+        quantity = parseInt(quantity_input.val()) + 1
         $.ajax({
           type: "PATCH",
           url: "/positions/#{id}",
-          data: {position: {quantity: (parseInt(quantity_input.val()) + 1)}}
+          data: {position: {quantity: quantity}}
         })
     )
 
@@ -36,10 +37,11 @@ $(document).on('turbolinks:load',
       ()->
         quantity_input = $(this).parent().find(".quantity-input")
         id = quantity_input.data("position")
+        quantity = parseInt(quantity_input.val()) - 1
         $.ajax({
           type: "PATCH",
           url: "/positions/#{id}",
-          data: {position: {quantity: (parseInt(quantity_input.val()) - 1)}}
+          data: {position: {quantity: quantity}}
         })
     )
 

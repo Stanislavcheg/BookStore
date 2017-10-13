@@ -1,11 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
-  helper_method :categories, :current_order
+  helper_method :current_order
   before_action :remember_location
-
-  def categories
-    Category.all
-  end
 
   def current_order
     if session[:order_id].nil?

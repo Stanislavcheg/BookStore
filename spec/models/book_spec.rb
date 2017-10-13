@@ -39,7 +39,7 @@ RSpec.describe Book, type: :model do
     describe 'price_euro' do
       it 'displays price with a euro sign' do
         book.price = 11.112
-        expect(book.price_euro).to eq("€11.11")
+        expect(book.decorate.price_euro).to eq("€11.11")
       end
     end
 
@@ -54,7 +54,7 @@ RSpec.describe Book, type: :model do
     describe 'authors_formated' do
       it 'displays a string with all authors joined with comma' do
         book.authors = [FactoryGirl.create(:author, first_name: 'John', last_name: 'Doe'), FactoryGirl.create(:author, first_name: 'Peter', last_name: 'White')]
-        expect(book.authors_formated).to eq('John Doe, Peter White')
+        expect(book.decorate.authors_formated).to eq('John Doe, Peter White')
       end
     end
 
@@ -63,7 +63,7 @@ RSpec.describe Book, type: :model do
         book.height = 6.53
         book.width = 3
         book.depth = 0.9
-        expect(book.dimensions).to eq('H:6.5" x W:3.0" x D:0.9"')
+        expect(book.decorate.dimensions).to eq('H:6.5" x W:3.0" x D:0.9"')
       end
     end
   end

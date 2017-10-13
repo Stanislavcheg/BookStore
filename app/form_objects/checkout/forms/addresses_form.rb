@@ -3,11 +3,7 @@ class AddressesForm < Rectify::Form
   attribute :shipping_address, ShippingAddressForm
 
   def save
-    if valid?
-      billing_address.save
-      shipping_address.save
-      return true
-    end
-    false
+    return false if invalid?
+    billing_address.save && shipping_address.save
   end
 end

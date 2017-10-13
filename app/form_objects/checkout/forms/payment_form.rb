@@ -12,12 +12,8 @@ class PaymentForm < Rectify::Form
   validates :expires, format: { with: /\A(0[1-9]|1[0-2])\/(\d{2})\z/ }
 
   def save
-    if valid?
-      persist!
-      true
-    else
-      false
-    end
+    return false if invalid?
+    persist!
   end
 
   private

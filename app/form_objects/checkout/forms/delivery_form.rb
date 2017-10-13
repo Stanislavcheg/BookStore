@@ -3,12 +3,8 @@ class DeliveryForm < Rectify::Form
   validates :id, presence: true
 
   def save
-    if valid?
-      persist!
-      true
-    else
-      false
-    end
+    return false if invalid?
+    persist!
   end
 
   private

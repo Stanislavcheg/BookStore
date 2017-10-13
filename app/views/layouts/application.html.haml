@@ -25,9 +25,9 @@
         = render 'layouts/cart', quantity: current_order.try(:positions).try(:size), cart_class: 'shop-link pull-right hidden-xs'
         #navbar.navbar-collapse.collapse.pl-30{'aria-expanded': "false"}
           .visible-xs
-            = render 'layouts/main_menu_mobile', categories: categories
+            = render 'layouts/main_menu_mobile', categories: Category.all
           .hidden-xs
-            = render 'layouts/main_menu_desktop', categories: categories
+            = render 'layouts/main_menu_desktop', categories: Category.all
     %p.notice= notice
     %p.alert= alert
     .application_container

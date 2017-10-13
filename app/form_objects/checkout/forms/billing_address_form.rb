@@ -1,11 +1,7 @@
 class BillingAddressForm < AddressForm
   def save
-    if valid?
-      persist!
-      true
-    else
-      false
-    end
+    return false if invalid?
+    persist!
   end
 
   private

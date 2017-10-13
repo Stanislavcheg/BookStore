@@ -20,7 +20,7 @@ $(document).on('turbolinks:load',
 
     $('.pass-form-cont').on('change'
       ()->
-        if $('#confirmPassword').val() and $('#password').val() and $('#oldPassword').val()
+        if $('#confirm-password').val() and $('#password').val() and $('#old-password').val()
           enable_button '#save-pass-btn'
         else
           disable_button '#save-pass-btn'

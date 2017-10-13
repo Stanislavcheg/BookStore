@@ -18,7 +18,7 @@ ActiveAdmin.register Order do
 
   form html: { multipart: true } do |f|
     f.inputs 'Change status' do
-      f.input :order_status, as: :select, collection: order.available_statuses,
+      f.input :order_status, as: :select, collection: order.decorate.available_statuses,
       include_blank: false
     end
     f.actions

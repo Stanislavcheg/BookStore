@@ -13,25 +13,29 @@
               %img{src: image.url}
     .col-sm-6
       %h1.mt-res-0= @book.name
-      %p.lead.small= @book.authors_formated
+      %p.lead.small= @book.decorate.authors_formated
       .row
         = form_for @position do |f|
           .col-xs-12.col-md-4
-            %p.h1.in-gold-500.mt-10= number_to_currency(@book.price,:unit=>'€')
+            %p.h1.in-gold-500.mt-10= @book.decorate.price_euro
           .col-xs-5.col-md-3
             .input-group.general-position
               %a.input-link.reduce_quantity
                 %i.fa.fa-minus.line-height-40
-              = f.text_field :quantity, value: 1, class: "form-control quantity-input", min: 1 
+              = f.text_field :quantity, value: 1, class: "form-control quantity-input", min: 1
               %a.input-link.add_quantity
                 %i.fa.fa-plus.line-height-40
           .col-xs-7.col-md-5
             = f.hidden_field :book_id, value: @book.id
-            = f.submit "Add to Cart", class: "btn btn-default pull-right general-position"
+            = f.submit "Add to Cart", class: "btn btn-default pull-right general-position buy"
       .general-info-wrap.divider-lg
         %p Description
-        %p.lead.small.line-height-2.more
-          = @book.description
+        %p.toggle-description.lead.small.line-height-2
+          %span.book-description>
+            = @book.description
+          %span.more-ellipses>
+          %span.more-content>
+          %a.more-link.in-gold-500
       .general-info-wrap.divider-lg
         .clearfix
           %p.pull-left Year of publication
@@ -39,7 +43,7 @@
       .general-info-wrap.divider-lg
         .clearfix
           %p.pull-left Dimensions
-          %p.lead.small.pull-right= @book.dimensions
+          %p.lead.small.pull-right= @book.decorate.dimensions
       .general-info-wrap.divider-lg
         .clearfix
           %p.pull-left Materials
@@ -47,12 +51,12 @@
   .mb-80
     %h3.in-gold-500.mb-25 Reviews (#{@book.reviews.approved.count})
     - if @book.reviews.approved.any?
-      = render 'reviews/reviews', reviews: @book.reviews.approved   
+      = render 'reviews/reviews', reviews: @book.reviews.approved
     - else
       .general-message-wrap.divider-lg
       .clearfix
     - if current_user
-      %h3.in-gold-500.mb-25 Write a Review 
+      %h3.in-gold-500.mb-25 Write a Review
       .col-md-6.col-md-offset-3
         = simple_form_for @review  do |f|
           .form-group

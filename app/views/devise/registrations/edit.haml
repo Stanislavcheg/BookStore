@@ -43,14 +43,14 @@
               %div.general-form-md.divider-lg-bottom.pb-25.password
                 .form-group.mb-30.field
                   = f.label :current_password, class: "control-label input-label", value: "Old Password"
-                  = f.password_field :current_password, autocomplete: "off", class: "form-control", id: "oldPassword", placeholder: "Old Password"
+                  = f.password_field :current_password, autocomplete: "off", class: "form-control", id: "old-password", placeholder: "Old Password"
                   %br
                 .form-group.mb-30.field
                   = f.label :password, class: "control-label input-label", value: "New Password"
                   = f.password_field :password, autocomplete: "off", class: "form-control", id: "password", placeholder: "New Password"
                 .form-group.mb-40.field
                   = f.label :password_confirmation, class: "control-label input-label", value: "Confirm Password"
-                  = f.password_field :password_confirmation, autocomplete: "off", class: "form-control", id: "confirmPassword", placeholder: "Confirm Password"
+                  = f.password_field :password_confirmation, autocomplete: "off", class: "form-control", id: "confirm-password", placeholder: "Confirm Password"
                 .general-text-align.actions
                   = f.submit "Save", class: "btn disabled mb-10", id: "save-pass-btn"
         .col-sm-12.remove_acc

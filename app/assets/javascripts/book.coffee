@@ -1,32 +1,33 @@
 $(document).on('turbolinks:load',
   () ->
-    showChar = 150  # How many characters are shown by default in the book description
-    ellipsestext = "..."
-    moretext = I18n.t("book.description.read_more")
-    lesstext = I18n.t("book.description.hide")
+    show_char = 150  # How many characters are shown by default in the book description
+    ellipses_text = "..."
+    more_text = I18n.t("book.description.read_more")
+    less_text = I18n.t("book.description.hide")
     quantity = $("#position_quantity")
 
-    $('.more').each(
+    $('.toggle-description').each(
       () ->
-        content = $(this).html()
-        if content.length > showChar
-          c = content.substr(0, showChar)
-          h = content.substr(showChar, content.length - showChar)
-          html = c + '<span class="moreellipses">' + ellipsestext + '&nbsp;</span><span class="morecontent"><span>' + h + '</span>&nbsp;&nbsp;<a href="" class="morelink in-gold-500">' + moretext + '</a></span>'
-          $(this).html(html)
+        content = $(this).find(".book-description").text()
+        if content.length > show_char
+          short_content = content.substr(0, show_char)
+          remaining_content = content.substr(show_char, content.length - show_char)
+          $(this).find('.book-description').text(short_content)
+          $(this).find('.more-ellipses').text(ellipses_text)
+          $(this).find('.more-content').text(remaining_content)
+          $(this).find('.more-link').text(more_text)
     )
 
-    $(".morelink").click(
+    $(".more-link").click(
       () ->
         if $(this).hasClass("less")
-          $(this).removeClass("less")
-          $(this).html(moretext)
+          $(this).html(more_text)
         else
-          $(this).addClass("less")
-          $(this).html(lesstext)
-          $(this).parent().prev().toggle()
-          $(this).prev().toggle()
-          return false
+          $(this).html(less_text)
+
+        $(this).toggleClass("less")
+        $(this).prev().toggle()
+        $(this).prev().prev().toggle()
     )
 
     $("a.add_quantity").on("click",

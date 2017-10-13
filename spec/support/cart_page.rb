@@ -30,7 +30,7 @@ class CartPage
 
   def add_position_quantity(position_id = @positions.first.id)
     within("#pos#{position_id}") do
-      sleep 0.3
+      sleep 0.4
       find('i.fa-plus').click
       wait_for_ajax
     end
@@ -39,7 +39,7 @@ class CartPage
 
   def reduce_position_quantity(position_id = @positions.first.id)
     within("#pos#{position_id}") do
-      sleep 0.3
+      sleep 0.4
       find('i.fa-minus').click
       wait_for_ajax
     end
@@ -48,8 +48,8 @@ class CartPage
 
   def fill_in_position_quantity(position_id, quantity)
     within("#pos#{position_id}") do
-      sleep 0.3
-      find("#quantity_#{position_id}").set quantity
+      sleep 0.4
+      find("input.quantity-input").set quantity
       first("span").click
       wait_for_ajax
     end
@@ -58,7 +58,7 @@ class CartPage
 
   def remove_position(position_id = @positions.first.id)
     within("#pos#{position_id}") do
-      sleep 0.3
+      sleep 0.4
       find('span.remove').click
       wait_for_ajax
     end
@@ -66,7 +66,7 @@ class CartPage
   end
 
   def fill_in_coupon(coupon_code = 'book_store')
-    sleep 0.3
+    sleep 0.4
     find("#update_cart_text").set coupon_code
     first("#update_cart_lbl").click
     wait_for_ajax

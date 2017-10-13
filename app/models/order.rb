@@ -1,5 +1,5 @@
 class Order < ApplicationRecord
-  before_validation :set_order_status
+  before_validation :set_order_status, :decorate
   before_save :update_subtotal, :update_total
   before_create :set_order_number
   belongs_to :coupon, optional: true
@@ -20,8 +20,8 @@ class Order < ApplicationRecord
     positions.map(&:book).include?(book)
   end
 
-  def name
-    "Order: #{order_number} #{order_status}"
+  def decorate
+    @decorator ||= OrderDecorator.new self
   end
 
   def subtotal
@@ -33,13 +33,7 @@ class Order < ApplicationRecord
   end
 
   def total
-    self[:total] = subtotal - discount + self.delivery.try(:price).to_f
-  end
-
-  def available_statuses
-    @exclude_list = ['in_progress']
-    @exclude_list << 'delivered' unless self.order_status == "in_delivery"
-    Order.order_statuses.keys - @exclude_list
+    subtotal - discount + delivery.try(:price).to_f
   end
 
 private

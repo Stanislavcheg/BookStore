@@ -35,9 +35,9 @@ class UserSettingsPage
   end
 
   def fill_in_new_password(new_password)
-    fill_in('oldPassword', with: @user.password)
+    fill_in('old-password', with: @user.password)
     fill_in('password', with: new_password)
-    fill_in('confirmPassword', with: new_password)
+    fill_in('confirm-password', with: new_password)
     first('p').click
     wait_for_ajax
     self

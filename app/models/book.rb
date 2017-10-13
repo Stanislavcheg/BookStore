@@ -1,5 +1,4 @@
 class Book < ApplicationRecord
-  include ActionView::Helpers::NumberHelper
 
   validates :name, :price, :description, presence: true
   validates :height, :width, :depth, :price, :year, numericality: { greater_than_or_equal_to: 0.01 }
@@ -10,23 +9,19 @@ class Book < ApplicationRecord
 
   mount_uploaders :images, ImageUploader
 
-  def short_description
-    description.truncate(100, separator: ' ')
-  end
+  scope :latest_books, -> { order(created_at: :desc).limit(3) }
 
-  def price_euro
-    number_to_currency price, unit: '€'
+  SHORT_DESCRIPTION_LENGHT = 100
+
+  def short_description
+    description.truncate(SHORT_DESCRIPTION_LENGHT, separator: ' ')
   end
 
   def sold_count
     positions.inject(0){ |sum, position| sum + position.quantity }
   end
 
-  def authors_formated
-    authors.join(", ")
-  end
-
-  def dimensions
-    "H:#{height.round(1)}\" x W:#{width.round(1)}\" x D:#{depth.round(1)}\""
+  def decorate
+    @decorator ||= BookDecorator.new self
   end
 end

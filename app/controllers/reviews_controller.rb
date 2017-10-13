@@ -5,7 +5,7 @@ class ReviewsController < ApplicationController
     @position = current_order.positions.new
 
     if @review.save
-      flash[:notice] = "Thanks for Review. It will be published as soon as Admin will approve it."
+      flash[:notice] = t('review.notice.on_create')
       redirect_to book_path @book
     else
       render 'books/show', id: @review.book_id, objects: [@book, @review, @position ]

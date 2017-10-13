@@ -10,7 +10,7 @@
       %td
         %span.in-grey-600 Price
       %td
-        %span.font-16.in-gold-500= number_to_currency(book.price,:unit=>'€')
+        %span.font-16.in-gold-500= book.decorate.price_euro
     %tr
       %td.vertical-middle
         %span.in-grey-600 Quantity

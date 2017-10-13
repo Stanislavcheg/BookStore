@@ -11,7 +11,7 @@ RSpec.describe CreditCard, type: :model do
     describe 'masked_number' do
       it 'shows only last 4 digits of credit number' do
         card.number = '1234567890123456'
-        expect(card.masked_number).to eq("**** **** **** 3456")
+        expect(card.decorate.masked_number).to eq("**** **** **** 3456")
       end
     end
   end
