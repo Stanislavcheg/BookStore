@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe PaymentForm do
-describe 'validations' do
+  describe 'validations' do
     context 'presence' do
       it { is_expected.to validate_presence_of(:number) }
       it { is_expected.to validate_presence_of(:expires) }

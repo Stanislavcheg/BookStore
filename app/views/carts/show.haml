@@ -5,7 +5,7 @@
       There are no items in your shopping cart.  Please #{link_to("go back", root_path)} and add some items to your cart.
   - else
     .visible-xs
-      - @positions.each do |position| 
+      - @positions.each do |position|
         = render 'carts/cart_row_mobile', book: position.book, position: position
     .hidden-xs
       %table.table.table-hover
@@ -20,7 +20,7 @@
           %th.col-total
             %span.in-grey-600 SubTotal
           %th.col-close
-        - @positions.each do |position| 
+        - @positions.each do |position|
           = render 'carts/cart_row_desktop', book: position.book, position: position
     .general-order-wrap
       .row
@@ -39,17 +39,17 @@
                 %td
                   %p.font-16 Subtotal:
                 %td
-                  %p.font-16= number_to_currency(current_order.subtotal,:unit=>'€')
+                  %p.font-16= current_order.decorate.subtotal_euro
               %tr
                 %td
                   %p.font-16 Coupon:
                 %td
-                  %p.font-16= number_to_currency(current_order.discount,:unit=>'€')
+                  %p.font-16= current_order.decorate.discount_euro
               %tr
                 %td
                   %strong.font-18 Order Total:
                 %td
-                  %strong.font-18= number_to_currency(current_order.total,:unit=>'€')
+                  %strong.font-18= current_order.decorate.total_euro
     = form_tag(checkout_url("address"), method: "get") do
       = submit_tag 'Checkout', class: "btn btn-default mb-20 center-block"
 = csrf_meta_tags

@@ -1,0 +1,25 @@
+#slider.carousel.slide{'data-ride': "carousel"}
+  %ol.carousel-indicators
+    %li.active{'data-target': "#slider", 'data-slide-to': "0"}
+    %li{'data-target': "#slider", 'data-slide-to': "1"}
+    %li{'data-target': "#slider", 'data-slide-to': "2"}
+  .carousel-inner{role: "listbox"}
+    - latest_books.each do |book|
+      .item
+        .row
+          .col-sm-5
+            .general-img-wrap
+              %img.img-shadow.general-thumbnail-img{src: book.images.first.try(:url), alt: book.name}
+          .col-sm-7
+            .mb-60
+              %h1= book.name
+              %p.lead= book.short_description
+              %p.lead.small= book.decorate.authors_formated
+              .general-align
+              = button_to 'Buy Now', positions_path(position: {quantity: 1, book_id: book.id}), class: 'btn btn-primary buy', remote: true, method: :post
+  %a.left.carousel-control{href: "#slider", role: "button", 'data-slide': "prev"}
+    %span.icon-prev{'aria-hidden': "true"}
+    %span.sr-only Previous
+  %a.right.carousel-control{href: "#slider", role: "button", 'data-slide': "next"}
+    %span.icon-next{'aria-hidden': "true"}
+    %span.sr-only Next

@@ -12,6 +12,6 @@
       %a{type: "button", 'data-toggle': "collapse", href: "#menu2", 'aria-expanded': "false", 'aria-controls': "menu"} My account
       %ul#menu2.collapse.list-unstyled.pl-30.mb-10{'aria-expanded': "false"}
         = render 'layouts/account_menu'
-  - else 
+  - else
     %li
       = link_to("Log in/Sign up", new_user_session_path)

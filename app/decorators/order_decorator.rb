@@ -17,7 +17,19 @@ class OrderDecorator
     available_status_codes.map { |code|  Order.order_statuses.key(code) }
   end
 
-  def price_euro
-    number_to_currency model.price, unit: '€'
+  def total_euro
+    number_to_currency model.total, unit: '€'
+  end
+
+  def subtotal_euro
+    number_to_currency model.subtotal, unit: '€'
+  end
+
+  def discount_euro
+    number_to_currency model.discount, unit: '€'
+  end
+
+  def updated_at_formated
+    model.updated_at.strftime("%F")
   end
 end
