@@ -11,7 +11,7 @@ class DeliveryForm < Rectify::Form
 
   def persist!
     order = context.order
-    order.delivery_id = self.id
+    order.delivery_id = id
     order.save
   end
 end

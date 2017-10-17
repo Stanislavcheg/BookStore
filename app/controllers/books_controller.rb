@@ -1,13 +1,12 @@
 class BooksController < ApplicationController
-  before_action :set_position, only: [:show, :index]
+  before_action :set_position, only: %i[show index]
 
   def show
     @book = Book.find(params[:id])
-    if current_user
-      @review = Review.new(book_id: @book.id,
-                           user_id: current_user.id,
-                             title: current_user.name)
-    end
+    return unless current_user
+    @review = Review.new(book_id: @book.id,
+                         user_id: current_user.id,
+                           title: current_user.name)
   end
 
   def index

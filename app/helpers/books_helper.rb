@@ -3,7 +3,7 @@ module BooksHelper
     link_to title, url(category, sort_by: sort_by, page: page, sort_title: title)
   end
 
-  def url(category, options = {})
+  def url(category, options={})
     if category
       category_books_path(category, options)
     else

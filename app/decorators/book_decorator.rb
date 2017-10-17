@@ -11,7 +11,7 @@ class BookDecorator
   end
 
   def authors_formated
-    model.authors.join(", ")
+    model.authors.join(', ')
   end
 
   def dimensions

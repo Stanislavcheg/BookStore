@@ -14,7 +14,7 @@ class OrderDecorator
     @exclude_list = [0]
     @exclude_list << 3 unless model.order_status == 2
     available_status_codes = Order.order_statuses.values - @exclude_list
-    available_status_codes.map { |code|  Order.order_statuses.key(code) }
+    available_status_codes.map {|code| Order.order_statuses.key(code) }
   end
 
   def total_euro
@@ -30,6 +30,6 @@ class OrderDecorator
   end
 
   def updated_at_formated
-    model.updated_at.strftime("%F")
+    model.updated_at.strftime('%F')
   end
 end

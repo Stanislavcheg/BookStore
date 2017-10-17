@@ -1,7 +1,7 @@
 ActiveAdmin.register Order do
   permit_params :order_status
   config.filters = false
-  actions :all, except: [:show, :create, :destroy, :new]
+  actions :all, except: %i[show create destroy new]
 
   scope :in_progress, default: true
   scope :delivered
@@ -16,7 +16,7 @@ ActiveAdmin.register Order do
     column 'Date of creation', :created_at
   end
 
-  form html: { multipart: true } do |f|
+  form html: {multipart: true} do |f|
     f.inputs 'Change status' do
       f.input :order_status, as: :select, collection: order.decorate.available_statuses,
       include_blank: false

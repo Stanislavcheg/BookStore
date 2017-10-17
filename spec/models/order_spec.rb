@@ -76,4 +76,17 @@ RSpec.describe Order, type: :model do
       end
     end
   end
+  describe 'decorators methods' do
+    it 'returns available statuses to change' do
+      expect(order_with_positions.decorate.available_statuses).to match_array(['in_queue', 'in_delivery', 'canceled'])
+    end
+
+    it 'returns formated string with order info' do
+      expect(order_with_positions.decorate.name).to eq("Order: #{order_with_positions.order_number} #{order_with_positions.order_status}")
+    end
+
+    it 'returns formated string with order updated info' do
+      expect(order_with_positions.decorate.updated_at_formated).to eq(order_with_positions.updated_at.strftime("%F"))
+    end
+  end
 end

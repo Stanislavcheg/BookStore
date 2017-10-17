@@ -16,7 +16,7 @@ class BookPresenter
   end
 
   def category_title
-    category ? category.name : "All"
+    category ? category.name : 'All'
   end
 
   def sort_title
@@ -28,7 +28,7 @@ class BookPresenter
   end
 
   def books
-    all_books.order(sort_by).limit(Integer(page_number)*6)
+    all_books.order(sort_by).limit(Integer(page_number) * 6)
   end
 
   def more_books_left

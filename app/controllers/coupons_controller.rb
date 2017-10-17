@@ -1,5 +1,4 @@
 class CouponsController < ApplicationController
-
   def link_order
     unless current_order.coupon
       @coupon = Coupon.find_by(code: params[:code])

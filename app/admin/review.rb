@@ -1,5 +1,5 @@
 ActiveAdmin.register Review do
-  actions :all, except: [:edit, :create, :destroy, :new]
+  actions :all, except: %i[edit create destroy new]
   config.filters = false
   permit_params :status
   includes :book, :user
@@ -29,7 +29,7 @@ ActiveAdmin.register Review do
       row :description
       row 'Action' do |review|
         if review.status == 'Unprocessed'
-          (link_to 'Approve', approve_admin_review_path(review), method: :put) + " " +
+          (link_to 'Approve', approve_admin_review_path(review), method: :put) + ' ' +
           (link_to 'Reject', reject_admin_review_path(review), method: :put)
         end
       end

@@ -8,11 +8,11 @@ class AddressForm < Rectify::Form
   attribute :phone, String
 
   validates :first_name, :last_name, :address, :city, :zip, :country, :phone, presence: true
-  validates :first_name, :last_name, format: { with: /\A[a-zA-Z]+\z/ }
-  validates :city, :country, format: { with: /\A[a-zA-Z ]+\z/ }
-  validates :address, format: { with: /\A[a-zA-Z\d'\-\s]+\z/ }
-  validates :zip, format: { with: /\A[\d\-]+\z/ }
-  validates :phone, format: { with: /\A\+\d+\z/ }
+  validates :first_name, :last_name, format: {with: /\A[a-zA-Z]+\z/}
+  validates :city, :country, format: {with: /\A[a-zA-Z ]+\z/}
+  validates :address, format: {with: /\A[a-zA-Z\d'\-\s]+\z/}
+  validates :zip, format: {with: /\A[\d\-]+\z/}
+  validates :phone, format: {with: /\A\+\d+\z/}
   validates_length_of :first_name, :last_name, :address, :city, :country, maximum: 50
   validates_length_of :phone, maximum: 15
   validates_length_of :zip, maximum: 10
@@ -20,7 +20,7 @@ class AddressForm < Rectify::Form
   protected
 
   def address_params
-    { first_name: first_name, last_name: last_name, address: address, city: city,
-      zip: zip, country: country, phone: phone }
+    {first_name: first_name, last_name: last_name, address: address, city: city,
+      zip: zip, country: country, phone: phone}
   end
 end

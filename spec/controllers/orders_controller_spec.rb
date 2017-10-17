@@ -18,17 +18,18 @@ RSpec.describe OrdersController, type: :controller do
     end
   end
   describe 'logged user' do
+    let(:user) { FactoryGirl.create(:user_with_orders) }
+
+    before do
+      sign_in user
+    end
+
     describe 'GET :index' do
-      let(:user) { FactoryGirl.create(:user_with_orders) }
-
-      before do
-        sign_in user
-      end
-
       it 'renders :index template' do
         get :index
         expect(response).to render_template(:index)
       end
+
       context "when user has orders" do
         it 'assigns all user orders to the template' do
           get :index
@@ -44,6 +45,17 @@ RSpec.describe OrdersController, type: :controller do
             expect(assigns(:orders).first).to eq(order)
           end
         end
+      end
+    end
+
+    describe 'GET :show' do
+      it 'renders :show template' do
+        get :show, params: { id: user.orders.first }
+        expect(response).to render_template(:show)
+      end
+      it 'assigns all user orders to the template' do
+        get :show, params: { id: user.orders.first }
+        expect(assigns(:order)).to eq(user.orders.first)
       end
     end
   end

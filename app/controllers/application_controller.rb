@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
     else
       begin
         Order.find(session[:order_id])
-      rescue
+      rescue RecordNotFound
         session[:order_id] = nil
         Order.new
       end
@@ -17,6 +17,6 @@ class ApplicationController < ActionController::Base
   end
 
   def remember_location
-    session[:prev_location] = request.referrer
+    session[:prev_location] = request.referer
   end
 end

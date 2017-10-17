@@ -1,6 +1,6 @@
 class Coupon < ApplicationRecord
   validates :code, :discount, presence: true
-  validates_uniqueness_of :code
+  validates :code, uniqueness: true
   has_many :orders
 
   def to_s

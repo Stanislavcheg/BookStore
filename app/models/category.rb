@@ -3,6 +3,6 @@ class Category < ApplicationRecord
   has_many :books
 
   def best_seller
-    books.sort_by { |book| book.sold_count }.last
+    books.sort_by(&:sold_count).last
   end
 end

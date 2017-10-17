@@ -1,7 +1,7 @@
 class Book < ApplicationRecord
 
   validates :name, :price, :description, presence: true
-  validates :height, :width, :depth, :price, :year, numericality: { greater_than_or_equal_to: 0.01 }
+  validates :height, :width, :depth, :price, :year, numericality: {greater_than_or_equal_to: 0.01}
   has_and_belongs_to_many :authors
   belongs_to :category
   has_many :positions
@@ -18,7 +18,7 @@ class Book < ApplicationRecord
   end
 
   def sold_count
-    positions.inject(0){ |sum, position| sum + position.quantity }
+    positions.inject(0) {|sum, position| sum + position.quantity }
   end
 
   def decorate

@@ -7,7 +7,7 @@ class PositionsController < ApplicationController
     @position = @order.positions.new(position_params)
     @order.save!
     session[:order_id] = @order.id
-    redirect_to request.referrer || root_path
+    redirect_to request.referer || root_path
   end
 
   def update
@@ -38,10 +38,9 @@ class PositionsController < ApplicationController
     @same_position = current_order.positions.find do |pos|
       pos.book_id == Integer(params[:position][:book_id])
     end
-    if @same_position
-      @same_position.quantity += 1
-      @same_position.save
-      redirect_to request.referrer
-    end
+    return unless @same_position
+    @same_position.quantity += 1
+    @same_position.save
+    redirect_to request.referer
   end
 end

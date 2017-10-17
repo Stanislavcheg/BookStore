@@ -10,9 +10,9 @@ class Order < ApplicationRecord
   has_one :shipping_address, as: :addressable, dependent: :destroy
   has_one :credit_card, dependent: :destroy
 
-  enum order_status: { in_progress: 0, in_queue: 1, in_delivery: 2, delivered: 3, canceled: 4 }
+  enum order_status: {in_progress: 0, in_queue: 1, in_delivery: 2, delivered: 3, canceled: 4}
 
-  scope :in_progress, -> { where(order_status: [:in_progress, :in_queue, :in_delivery]) }
+  scope :in_progress, -> { where(order_status: %i[in_progress in_queue in_delivery]) }
   scope :delivered, -> { where(order_status: :delivered) }
   scope :canceled, -> { where(order_status: :canceled) }
 
@@ -25,7 +25,7 @@ class Order < ApplicationRecord
   end
 
   def subtotal
-    positions.collect { |pos| pos.valid? ? pos.total_price : 0 }.sum
+    positions.map {|pos| pos.valid? ? pos.total_price : 0 }.sum
   end
 
   def discount
@@ -36,7 +36,7 @@ class Order < ApplicationRecord
     subtotal - discount + delivery.try(:price).to_f
   end
 
-private
+  private
 
   def set_order_status
     self.order_status ||= 0

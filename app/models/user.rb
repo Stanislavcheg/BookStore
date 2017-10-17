@@ -10,6 +10,6 @@ class User < ApplicationRecord
   include Authentication
 
   def last_order
-    orders.order("updated_at desc").limit(1).first
+    orders.order('updated_at desc').limit(1).first
   end
 end

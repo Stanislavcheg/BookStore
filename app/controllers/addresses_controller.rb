@@ -6,7 +6,7 @@ class AddressesController < ApplicationController
       yield
       redirect_to edit_user_registration_path
     else
-      render 'devise/registrations/edit', locals: { address_identifier => form }
+      render 'devise/registrations/edit', locals: {address_identifier => form}
     end
   end
 
