@@ -1,0 +1,6 @@
+= link_to cart_path, class: cart_class do
+  - if quantity > 0
+    %span.shop-icon
+      %span.shop-quantity= quantity
+  -else
+    %span.shop-icon

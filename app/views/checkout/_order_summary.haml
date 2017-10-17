@@ -1,0 +1,18 @@
+%p.in-gold-500.font-18 Order Summary
+%table.general-summary-table
+  %tr
+    %td
+      %p.font-16 Subtotal:
+    %td
+      %p.font-16= order.decorate.subtotal_euro
+  - if order.coupon
+    %tr
+      %td
+        %p.font-16 Coupon:
+      %td
+        %p.font-16= order.decorate.discount_euro
+  %tr
+    %td
+      %strong.font-18 Order Total:
+    %td
+      %strong.font-18= order.decorate.total_euro

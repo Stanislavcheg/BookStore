@@ -1,0 +1,21 @@
+%tr{id: "pos#{position.id}"}
+  %td
+    .general-img-wrap-table
+      %img.cart-img-shadow.pull-left{src: book.images.first.try(:url), alt: book.name}
+  %td
+    %p.title
+      = link_to book.name, book_path(book)
+  %td
+    %span.font-16.in-gold-500= book.decorate.price_euro
+  %td
+    .input-group
+      %a.input-link.neg-quantity
+        %i.fa.fa-minus.line-heaght-40
+      %input.form-control.quantity-input{type: "text", value: "#{position.quantity}", "data-position": "#{position.id}"}
+      %a.input-link.pos-quantity
+        %i.fa.fa-plus.line-heaght-40
+  %td
+    %span.font-16.in-gold-500= number_to_currency(position.total_price,:unit=>'€')
+  %td
+    %button.close.general-cart-close{type: "button", 'aria-label': "Close", "data-position": "#{position.id}"}
+      %span.remove{'aria-hidden': "true"} &times;

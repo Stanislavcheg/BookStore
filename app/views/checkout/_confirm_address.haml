@@ -1,0 +1,11 @@
+%p.general-address
+  = address.decorate.full_name
+  = link_to('edit', edit_url, class: 'general-edit')
+  %br
+  = address.address
+  %br
+  = address.decorate.full_city
+  %br
+  = address.country
+  %br
+  = address.decorate.full_phone

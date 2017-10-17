@@ -1,0 +1,33 @@
+%main.container.general-main-wrap
+  = render 'checkout/steps_panel'
+  = hidden_field_tag("step_name", "Confirm")
+  .row.mb-20
+    .col-sm-3
+      %h3.general-subtitle Shipping Address
+      = render 'checkout/confirm_address', address: current_order.shipping_address, edit_url: wizard_path(:address)
+    .col-sm-3
+      %h3.general-subtitle Billing Address
+      = render 'checkout/confirm_address', address: current_order.billing_address, edit_url: wizard_path(:address)
+    .col-sm-3
+      %h3.general-subtitle Shipments
+      %p.general-address
+        = current_order.delivery.method
+        = link_to('edit', wizard_path(:delivery), class: 'general-edit')
+        %br
+        = current_order.delivery.days
+    .col-sm-3
+      %h3.general-subtitle Payment Information
+      %p.general-address
+        = current_order.credit_card.decorate.masked_number
+        = link_to('edit', wizard_path(:payment), class: 'general-edit')
+        %br
+        = current_order.credit_card.expires
+  .visible-xs
+    = render '/checkout/positions_mobile', positions: current_order.positions
+  .hidden-xs.divider-lg.pt-20
+    = render '/checkout/positions_desktop', positions: current_order.positions
+  .text-center.general-text-right#confirm_order_summary
+    = render 'checkout/order_summary', order: current_order
+  .text-center#confirm_submit
+    = form_tag(next_wizard_path, method: :get) do
+      = submit_tag "Place Order", class: "btn btn-default mb-20 submit"

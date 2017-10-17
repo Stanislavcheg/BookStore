@@ -1,0 +1,39 @@
+machine:
+  ruby:
+    version:
+      2.4.1
+  environment:
+      FACEBOOK_APP_ID: 'secret app id is here'
+      FACEBOOK_SECRET: 'secret app key is here'
+      S3_KEY: 's3 key is here'
+      S3_SECRET: 's3 secret is here'
+      S3_BUCKET_NAME: 'bucket name is here'
+      S3_REGION: 'region is here'
+      GMAIL_DOMAIN: 'domain is here'
+      GMAIL_USERNAME: 'user_name is here'
+      GMAIL_PASSWORD: 'password is here'
+
+
+dependencies:
+  pre:
+    - gem install bundler
+    - gem install rubygems-bundler
+    - gem regenerate_binstubs
+
+## Customize database setup
+database:
+  override:
+    # replace CircleCI's generated database.yml
+    - cp config/database.ci.yml config/database.yml
+    - bundle exec rake db:setup
+
+## Customize test commands
+test:
+  override:
+    - bundle exec rspec spec/
+
+general:
+  branches:
+    only:
+      - master 
+      - dev

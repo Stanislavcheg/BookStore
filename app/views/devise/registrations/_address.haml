@@ -1,0 +1,18 @@
+= simple_form_for address do |f|
+  .form-group
+    = f.input :first_name, autofocus: true, label: 'First Name', class: "form-control", id: "#{address.to_s}_first_name", placeholder: "First Name", label_html: { class: 'control-label input-label' }
+  .form-group
+    = f.input :last_name, label: 'Last Name', class: "form-control", id: "#{address.to_s}_last_name", placeholder: "Last Name", label_html: { class: 'control-label input-label' }
+  .form-group
+    = f.input :address, label: 'Address', class: "form-control", id: "#{address.to_s}_address", placeholder: "Address", label_html: { class: 'control-label input-label' }
+  .form-group
+    = f.input :city, label: 'City', class: "form-control", id: "#{address.to_s}_city", placeholder: "City", label_html: { class: 'control-label input-label' }
+  .form-group
+    = f.input :zip, label: 'Zip', class: "form-control", id: "#{address.to_s}_zip", placeholder: "Zip", label_html: { class: 'control-label input-label' }
+  .form-group
+    = f.input :country, label: 'Country', class: "form-control", id: "#{address.to_s}_country", placeholder: "Country", label_html: { class: 'control-label input-label' }
+  .form-group.mb-60
+    = f.input :phone, label: 'Phone', class: "form-control", id: "#{address.to_s}_phone", placeholder: "Example +355 66 123 4567", label_html: { class: 'control-label input-label' }
+  .text-center.general-text-align
+    = f.input :type, as: :hidden, input_html: { value: address.to_s }
+    = f.button :submit, "Save", class: "btn btn-default"

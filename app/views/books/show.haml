@@ -1,0 +1,72 @@
+%main.container
+  = link_to :back, class: 'general-back-link' do
+    %i.fa.fa-long-arrow-left.mr-15
+    Back to results
+  .row
+    .col-sm-6
+      .product-gallery
+        .mb-20
+          %img.img-responsive{src: @book.images.first.try(:url)}
+        .images.clearfix
+          - @book.images.slice(1, @book.images.size).try(:each) do |image|
+            %a.img-link{href: "#"}
+              %img{src: image.url}
+    .col-sm-6
+      %h1.mt-res-0= @book.name
+      %p.lead.small= @book.decorate.authors_formated
+      .row
+        = form_for @position do |f|
+          .col-xs-12.col-md-4
+            %p.h1.in-gold-500.mt-10= @book.decorate.price_euro
+          .col-xs-5.col-md-3
+            .input-group.general-position
+              %a.input-link.reduce_quantity
+                %i.fa.fa-minus.line-height-40
+              = f.text_field :quantity, value: 1, class: "form-control quantity-input", min: 1
+              %a.input-link.add_quantity
+                %i.fa.fa-plus.line-height-40
+          .col-xs-7.col-md-5
+            = f.hidden_field :book_id, value: @book.id
+            = f.submit "Add to Cart", class: "btn btn-default pull-right general-position buy"
+      .general-info-wrap.divider-lg
+        %p Description
+        %p.toggle-description.lead.small.line-height-2
+          %span.book-description>
+            = @book.description
+          %span.more-ellipses>
+          %span.more-content>
+          %a.more-link.in-gold-500
+      .general-info-wrap.divider-lg
+        .clearfix
+          %p.pull-left Year of publication
+          %p.lead.small.pull-right= @book.year
+      .general-info-wrap.divider-lg
+        .clearfix
+          %p.pull-left Dimensions
+          %p.lead.small.pull-right= @book.decorate.dimensions
+      .general-info-wrap.divider-lg
+        .clearfix
+          %p.pull-left Materials
+          %p.lead.small.pull-right= @book.materials
+  .mb-80
+    %h3.in-gold-500.mb-25 Reviews (#{@book.reviews.approved.count})
+    - if @book.reviews.approved.any?
+      = render 'reviews/reviews', reviews: @book.reviews.approved
+    - else
+      .general-message-wrap.divider-lg
+      .clearfix
+    - if current_user
+      %h3.in-gold-500.mb-25 Write a Review
+      .col-md-6.col-md-offset-3
+        = simple_form_for @review  do |f|
+          .form-group
+            = f.input :title, label: 'Full Name', class: "form-control", placeholder: "Full Name", label_html: { class: 'control-label input-label' }
+          .form-group
+            = f.input :rating, label: 'Rating', class: "form-control", collection: 1..5, include_blank: false, label_html: { class: 'control-label input-label' }
+          .form-group
+            = f.input :description, label: 'Description',input_html: {rows: 5}, class: "form-control", placeholder: "Description", label_html: { class: 'control-label input-label' }
+            = f.input :user_id, as: :hidden
+            = f.input :book_id, as: :hidden
+          .text-center.general-text-align
+            = f.button :submit, "Save", class: "btn btn-default review_submit"
+    .clearfix
